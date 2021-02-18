@@ -1,11 +1,9 @@
 import EventEmitter from 'events';
+import { baseStructures } from './base';
 import Team from './lib/Team';
 import User from './lib/User';
-import RequestManager from './rest/RequestManager';
-import Collection from './utils/Collection';
-import GuildedEvents from './websocket/Events';
+import { structures } from './structures';
 import Shard from './websocket/Shard';
-import WebsocketManager from './websocket/WebsocketManager';
 
 export default class Client extends EventEmitter {
   /** The id of this client. */
@@ -22,16 +20,16 @@ export default class Client extends EventEmitter {
   imageDefaultHeight = 128;
 
   /** All the users currently cached/accessible to the client. */
-  users = new Collection<string, User>(this);
+  users = new baseStructures.Collection<string, User>(this);
   /** All the teams currently cached/accessible to the client. */
-  teams = new Collection<string, Team>(this);
+  teams = new baseStructures.Collection<string, Team>(this);
 
   /** The request manager that will manage your rate limits. */
-  requestManager = new RequestManager(this);
+  requestManager = new structures.RequestManager(this);
   /** The websocket manager that will manage your websocket connections */
-  websocketManager = new WebsocketManager(this);
+  websocketManager = new structures.WebsocketManager(this);
   /** The events manager that will handle incoming websocket event payloads. */
-  eventsManager = new GuildedEvents(this);
+  eventsManager = new structures.GuildedEvents(this);
 
   constructor(options: ClientOptions) {
     super();

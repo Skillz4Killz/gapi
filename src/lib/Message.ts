@@ -1,7 +1,7 @@
+import { baseStructures } from '../base';
 import Client from '../Client';
-import Base from './Base';
 
-export default class Message extends Base {
+export default class Message extends baseStructures.Base {
   /** The guilded client uuid */
   guildedClientId: string;
   /** The channel id where this message was sent */

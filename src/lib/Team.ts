@@ -1,14 +1,13 @@
+import { baseStructures } from '../base';
 import Client from '../Client';
-import Collection from '../utils/Collection';
-import Base from './Base';
 
-export default class Team extends Base {
+export default class Team extends baseStructures.Base {
   /** The unique hash for this teams banner. */
   hash = '';
 
   // TODO: fill these
-  members = new Collection(this.client);
-  groups = new Collection(this.client);
+  members = new baseStructures.Collection(this.client);
+  groups = new baseStructures.Collection(this.client);
 
   constructor(client: Client, payload: GuildedTeam) {
     super(client, payload.id);
