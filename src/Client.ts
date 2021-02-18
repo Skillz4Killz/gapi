@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import { baseStructures } from './base';
 import Team from './lib/Team';
 import User from './lib/User';
+import { ENDPOINTS } from './rest/endpoints';
 import { structures } from './structures';
 import Shard from './websocket/Shard';
 
@@ -68,6 +69,14 @@ export default class Client extends EventEmitter {
   /** Used to disconnect the client. */
   disconnect(reason = '') {
     this.emit('debug', `[DEBUG] Disconnecting`, reason);
+  }
+
+  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cached users. */
+  async fetchUser(id: string, force = false) {
+    // IF USER IS CACHED JUST USE THAT
+    if (!force && this.users.has(id)) return this.users.get(id);
+
+    return this.requestManager.fetchUser(id);
   }
 }
 

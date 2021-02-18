@@ -8,6 +8,9 @@ export const ENDPOINTS = {
   /** Pings and keeps the connection alive */
   ping: `${BASE_URL}/users/me/ping`,
 
+  // USER ENDPOINTS
+  user: (id: string) => `${BASE_URL}/users/${id}`,
+
   // MEMBER ENDPOINGS
   /** Edit a members nickname */
   nickname: (teamId: string, userId: string) => `${BASE_URL}/teams/${teamId}/members/${userId}/nickname`,

@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import Client from '../Client';
 import { GuildedTeam } from '../lib/Team';
+import { structures } from '../structures';
 import { ENDPOINTS } from './endpoints';
 
 export default class RequestManager {
@@ -104,6 +105,12 @@ export default class RequestManager {
       // TODO: Create channel based on type of channel
       // this.client.channels.set(channel.id, new structures.Channel)
     }
+  }
+
+  /** Fetches a user. */
+  async fetchUser(id: string) {
+    const user = await this.get(ENDPOINTS.user(id));
+    return this.client.users.set(id, new structures.User(this.client, user)).get(id);
   }
 }
 
