@@ -164,11 +164,13 @@ export default class Shard extends EventEmitter {
     console.log('disconnected', reconnect);
   }
 
+  /** Sends a heartbeat to the websocket and rest to maintain the connection */
   heartbeat() {
     this.lastHeartbeatSent = new Date().getTime();
-    if (this.ws?.readyState === WebSocket.OPEN) {
-      this.ws?.send('2');
-      this.client.requestManager.ping();
-    }
+    // DON"T HEARTBEAT IF NOT OPEN
+    if (this.ws?.readyState !== WebSocket.OPEN) return;
+
+    this.ws?.send('2');
+    this.client.requestManager.ping();
   }
 }
