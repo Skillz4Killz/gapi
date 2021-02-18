@@ -2,6 +2,8 @@
 
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
+> Currently pre v1.0. Use with caution.
+
 # Design Goals
 
 - Best Scalability!
