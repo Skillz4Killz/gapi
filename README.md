@@ -1,8 +1,10 @@
-# gapi
+# gapi / gupi
 
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
-> Currently pre v1.0. Use with caution.
+> Currently unstable and in active dev. Use with caution.
+
+> The name is gapi but silly google took that name so on npm we use gupi!
 
 # Design Goals
 
@@ -15,7 +17,7 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 ## Beginner/Basic
 
 ```ts
-import { Client } from 'gapi';
+import { Client } from 'gupi';
 
 const client = new Client({ email: 'emailhere', password: 'passwordhere' })
   .on('ready', () => console.log('Successfully connected to gateway'))
@@ -30,7 +32,7 @@ const client = new Client({ email: 'emailhere', password: 'passwordhere' })
 ## Advanced
 
 ```ts
-import { Client, baseStructures, structures } from 'gapi';
+import { Client, baseStructures, structures } from 'gupi';
 
 // Override any internal structures without having to fork and maintain headaches.
 baseStructures.Base = class {
@@ -108,3 +110,5 @@ client.connect();
   - Prettier
   - TSC
   - Deploy on release
+- Readme badges
+- Readme image/logo??

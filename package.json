@@ -2,21 +2,32 @@
   "name": "gupi",
   "version": "1.0.0",
   "description": "A TypeScript NodeJS API Wrapper for Guilded.gg API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prepack": "tsc --declaration",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Skillz4Killz/gupi.git"
   },
-  "keywords": [],
+  "keywords": [
+    "guilded",
+    "guilded.gg",
+    "bot"
+  ],
   "author": "Skillz4Killz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Skillz4Killz/gupi/issues"
+    "url": "https://github.com/Skillz4Killz/gapi/issues"
   },
-  "homepage": "https://github.com/Skillz4Killz/gupi#readme",
+  "homepage": "https://github.com/Skillz4Killz/gapi#readme",
   "dependencies": {
     "node-fetch": "^2.6.1",
     "ws": "^7.4.3"
