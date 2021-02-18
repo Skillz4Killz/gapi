@@ -25,10 +25,10 @@ export default class RequestManager {
     const data = (await this.post(ENDPOINTS.login, {
       body: {
         email: this.client.email,
-        password: this.client.password
+        password: this.client.password,
       },
       // TODO: HANDLE THIS BETTER! NECESSARY TO GET HEADERS
-      returnRaw: true
+      returnRaw: true,
       // TODO: fix any
     })) as any;
 
@@ -55,6 +55,11 @@ export default class RequestManager {
     return this.request(url, { method: 'POST', ...body });
   }
 
+  /** Sends a put request to the api. */
+  async put(url: string, body?: Record<string, any>) {
+    return this.request(url, { method: 'PUT', ...body });
+  }
+
   /** Creates the final request to be sent using headers and all necessary information for the api. */
   async request(
     url: string,
@@ -62,7 +67,7 @@ export default class RequestManager {
       body?: Record<string, any>;
       method: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
       returnRaw?: boolean;
-    }
+    },
   ) {
     // TODO: make it an event
     console.log(url, data);
@@ -75,14 +80,19 @@ export default class RequestManager {
         ...(this.hmacSignedSession ? { hmac_signed_session: this.hmacSignedSession } : {}),
         ...(this.cookie ? { cookie: this.cookie } : {}),
         // GET AND DELETE SHOULD NOT SEND THIS HEADER
-        ...(['GET', 'DELETE'].includes(data.method) ? {} : { 'Content-Type': 'application/json' })
-      }
+        ...(['GET', 'DELETE'].includes(data.method) ? {} : { 'Content-Type': 'application/json' }),
+      },
     });
 
     if (request.status < 200 || request.status > 299) {
     }
 
     return data.returnRaw ? request : await request.json().catch(console.error);
+  }
+
+  // MEMBER RELATED METHODS
+  editNickname(teamId: string, userId: string, nickname: string) {
+    return this.put(ENDPOINTS.nickname(teamId, userId), { nickname });
   }
 }
 
@@ -118,13 +128,13 @@ export interface GuildedClientData {
                       text: string;
                       marks: [];
                       object: string;
-                    }
+                    },
                   ];
                   object: string;
-                }
+                },
               ];
               object: string;
-            }
+            },
           ];
           object: string;
         };
@@ -179,12 +189,12 @@ export interface GuildedClientData {
       name: string;
       id: string;
       aliases: [];
-    }
+    },
   ];
   reactionUsages: [
     {
       id: string;
       total: 9;
-    }
+    },
   ];
 }

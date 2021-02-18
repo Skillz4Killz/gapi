@@ -26,7 +26,7 @@ export default class Team extends baseStructures.Base {
       width?: number;
       height?: number;
       type?: 'Small' | 'Medium' | 'Large';
-    } = { type: 'Medium' }
+    } = { type: 'Medium' },
   ) {
     if (options.type) return `https://img.guildedcdn.com/TeamAvatar/${this.hash}-${options.type}.png`;
 
@@ -47,6 +47,11 @@ export default class Team extends baseStructures.Base {
       // @ts-ignore
       this[key as keyof GuildedTeam] = value;
     }
+  }
+
+  /** Edit a members nickname in this team */
+  editNickname(userId: string, nickname: string) {
+    return this.client.requestManager.editNickname(this.id, userId, nickname);
   }
 }
 
@@ -147,7 +152,7 @@ export interface GuildedTeam {
   flair: [
     {
       id: 2;
-    }
+    },
   ];
   subscriptionInfo: undefined;
 }

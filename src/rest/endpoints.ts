@@ -6,7 +6,11 @@ export const ENDPOINTS = {
   /** Logs in using email and password. */
   login: `${BASE_URL}/login`,
   /** Pings and keeps the connection alive */
-  ping: `${BASE_URL}/users/me/ping`
+  ping: `${BASE_URL}/users/me/ping`,
+
+  // MEMBER ENDPOINGS
+  /** Edit a members nickname */
+  nickname: (teamId: string, userId: string) => `${BASE_URL}/teams/${teamId}/members/${userId}/nickname`,
 };
 
 export type Endpoints = keyof typeof ENDPOINTS;
