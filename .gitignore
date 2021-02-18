@@ -1,3 +1,7 @@
+# Custom
+## Allow testing the lib
+test.ts
+
 # Logs
 logs
 *.log
