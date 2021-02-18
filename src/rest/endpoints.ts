@@ -8,6 +8,9 @@ export const ENDPOINTS = {
   /** Pings and keeps the connection alive */
   ping: `${BASE_URL}/users/me/ping`,
 
+  // TEAM ENDPOINTS
+  team: (id: string) => `${BASE_URL}/teams/${id}`,
+
   // USER ENDPOINTS
   user: (id: string) => `${BASE_URL}/users/${id}`,
 
@@ -17,7 +20,7 @@ export const ENDPOINTS = {
 
   // CHANNEL ENDPOINTS
   /** Fetches all channels for the team */
-  channels: (teamId: string) => `${BASE_URL}/teams/${teamId}/channels`,
+  channels: (id: string) => `${BASE_URL}/teams/${id}/channels`,
 };
 
 export type Endpoints = keyof typeof ENDPOINTS;

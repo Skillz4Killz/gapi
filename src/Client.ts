@@ -71,12 +71,20 @@ export default class Client extends EventEmitter {
     this.emit('debug', `[DEBUG] Disconnecting`, reason);
   }
 
-  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cached users. */
+  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cache. */
   async fetchUser(id: string, force = false) {
-    // IF USER IS CACHED JUST USE THAT
+    // IF IS CACHED JUST USE THAT
     if (!force && this.users.has(id)) return this.users.get(id);
 
     return this.requestManager.fetchUser(id);
+  }
+
+  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cache. */
+  async fetchTeam(id: string, force = false) {
+    // IF IS CACHED JUST USE THAT
+    if (!force && this.teams.has(id)) return this.teams.get(id);
+
+    return this.requestManager.fetchTeam(id);
   }
 }
 

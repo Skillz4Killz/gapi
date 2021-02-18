@@ -112,6 +112,12 @@ export default class RequestManager {
     const user = await this.get(ENDPOINTS.user(id));
     return this.client.users.set(id, new structures.User(this.client, user)).get(id);
   }
+
+  /** Fetches a team */
+  async fetchTeam(id: string) {
+    const team = await this.get(ENDPOINTS.team(id));
+    return this.client.teams.set(id, new structures.Team(this.client, team)).get(id);
+  }
 }
 
 // TODO: THIS COULD BE BETTER
