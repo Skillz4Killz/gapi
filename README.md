@@ -99,7 +99,7 @@ client.connect();
     - Uses i18next, one of the best localization tools available.
     - Supports nested folders to keep cleaner translation files
 - 100% API coverage
-- Redis cache
+- Custom(Redis) cache support
 - Proxy WS support
 - Proxy rest support
 - Step by step guide
