@@ -73,7 +73,7 @@ export default class Shard extends EventEmitter {
 
     this.connectTimeout = setTimeout(() => {
       if (this.isConnecting) {
-        this.emit('error', new Error('Connection timeout'), this.id);
+        this.emit('wsConnectionError', new Error('Connection timeout'), this.id);
         this.disconnect();
       }
     }, this.client.connectionTimeout);
@@ -136,7 +136,7 @@ export default class Shard extends EventEmitter {
           this.emit('unknown', code, packet, this.id);
       }
     } catch (err) {
-      this.emit('error', err, this.id);
+      this.emit('shardMessageError', err, this.id);
     }
   }
 
