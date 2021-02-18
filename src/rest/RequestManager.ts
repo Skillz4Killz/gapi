@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import Client from '../Client';
+import { GuildedTeam } from '../lib/Team';
 import { ENDPOINTS } from './endpoints';
 
 export default class RequestManager {
@@ -167,108 +168,7 @@ export interface GuildedClientData {
       includedUpsells: [];
     };
   };
-  teams: [
-    {
-      createdAt: string;
-      id: string;
-      ownerId: string;
-      name: string;
-      subdomain: string;
-      rankNames: null;
-      profilePicture: string;
-      teamDashImage: string;
-      status: null;
-      teamPreferences: null;
-      additionalGameInfo: {};
-      discordGuildId: null;
-      discordServerName: null;
-      customizationInfo: {};
-      homeBannerImageSm: string;
-      homeBannerImageMd: string;
-      homeBannerImageLg: string;
-      insightsInfo: {};
-      alphaInfo: {};
-      timezone: string;
-      isRecruiting: boolean;
-      isVerified: boolean;
-      isPublic: boolean;
-      alwaysShowTeamHome: boolean;
-      isPro: boolean;
-      autoSyncDiscordRoles: boolean;
-      type: string;
-      memberCount: string;
-      followerCount: string;
-      baseGroup: {
-        id: string;
-        teamId: string;
-        gameId: null;
-        visibilityTeamRoleId: string;
-        membershipTeamRoleId: string;
-        isBase: boolean;
-        name: string;
-        description: null;
-        additionalGameInfo: {};
-        createdBy: null;
-        createdAt: string;
-        updatedBy: null;
-        updatedAt: null;
-        deletedAt: null;
-        priority: null;
-        customReactionId: null;
-        isPublic: boolean;
-        type: string;
-        avatar: null;
-        banner: null;
-      };
-      membershipRole: string;
-      roleIds: string[];
-      rolesById: {
-        roleId: {
-          id: string;
-          name: string;
-          color: string;
-          isBase: boolean;
-          teamId: string;
-          priority: 4;
-          createdAt: string;
-          updatedAt: string;
-          permissions: {
-            chat: 119;
-            docs: 15;
-            forms: 18;
-            lists: 63;
-            media: 15;
-            voice: 8179;
-            forums: 123;
-            general: 15412;
-            calendar: 31;
-            scheduling: 11;
-            matchmaking: 1;
-            recruitment: 55;
-            announcements: 7;
-            customization: 49;
-          };
-          isMentionable: boolean;
-          discordRoleId: null;
-          discordSyncedAt: null;
-          isSelfAssignable: boolean;
-        };
-      };
-      isFavorite: boolean;
-      canInviteMembers: boolean;
-      canUpdateTeam: boolean;
-      canManageTournaments: boolean;
-      viewerIsMember: boolean;
-      isAdmin: boolean;
-      games: [];
-      flair: [
-        {
-          id: 2;
-        }
-      ];
-      subscriptionInfo: null;
-    }
-  ];
+  teams: GuildedTeam[];
   customReactions: [
     {
       createdBy: string;
