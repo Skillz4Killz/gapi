@@ -18,11 +18,13 @@
   },
   "homepage": "https://github.com/Skillz4Killz/gupi#readme",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "ws": "^7.4.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.28",
     "@types/node-fetch": "^2.5.8",
+    "@types/ws": "^7.4.0",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
