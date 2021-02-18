@@ -3,38 +3,38 @@ import Base from './Base';
 
 export default class Message extends Base {
   /** The guilded client uuid */
-  guildedClientID: string;
+  guildedClientId: string;
   /** The channel id where this message was sent */
-  channelID: string;
+  channelId: string;
   /** The category id of the channel this was sent in if available. */
-  channelCategoryID: number;
+  channelCategoryId: number;
   /** The type of the channel */
   channelType: string;
   /** The team id */
-  teamID: string;
+  teamId: string;
   /** The type of message this is. */
   type = 'default';
   /** The id of the user who sent this message. */
-  authorID: string;
+  authorId: string;
   /** The exact timestamp at when this message was sent. */
   timestamp: number;
   /** The content id for this message content. */
-  contentID: string;
+  contentId: string;
   /** The content/text for this message. */
   content = '';
 
   constructor(client: Client, payload: MessagePayload) {
     super(client, payload.message.id);
 
-    this.guildedClientID = payload.guildedClientId;
-    this.channelID = payload.channelId;
-    this.channelCategoryID = payload.channelCategoryId;
+    this.guildedClientId = payload.guildedClientId;
+    this.channelId = payload.channelId;
+    this.channelCategoryId = payload.channelCategoryId;
     this.channelType = payload.channelType;
-    this.teamID = payload.teamId;
+    this.teamId = payload.teamId;
     this.type = payload.message.type;
-    this.authorID = payload.createdBy;
+    this.authorId = payload.createdBy;
     this.timestamp = Date.parse(payload.createdAt);
-    this.contentID = payload.contentId;
+    this.contentId = payload.contentId;
     this.content = payload.message.content.document.nodes[0]?.nodes[0]?.leaves[0]?.text || '';
   }
 
