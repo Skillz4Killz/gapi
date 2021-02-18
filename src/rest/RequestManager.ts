@@ -94,6 +94,17 @@ export default class RequestManager {
   editNickname(teamId: string, userId: string, nickname: string) {
     return this.put(ENDPOINTS.nickname(teamId, userId), { nickname });
   }
+
+  // CHANNEL RELATED METHODS
+  async fetchChannels(teamId: string, cache = true) {
+    if (!cache) return this.get(ENDPOINTS.channels(teamId));
+
+    const channels = await this.get(ENDPOINTS.channels(teamId));
+    for (const _channel of channels) {
+      // TODO: Create channel based on type of channel
+      // this.client.channels.set(channel.id, new structures.Channel)
+    }
+  }
 }
 
 // TODO: THIS COULD BE BETTER

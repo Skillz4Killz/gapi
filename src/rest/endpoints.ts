@@ -11,6 +11,10 @@ export const ENDPOINTS = {
   // MEMBER ENDPOINGS
   /** Edit a members nickname */
   nickname: (teamId: string, userId: string) => `${BASE_URL}/teams/${teamId}/members/${userId}/nickname`,
+
+  // CHANNEL ENDPOINTS
+  /** Fetches all channels for the team */
+  channels: (teamId: string) => `${BASE_URL}/teams/${teamId}/channels`,
 };
 
 export type Endpoints = keyof typeof ENDPOINTS;

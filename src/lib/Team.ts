@@ -53,6 +53,11 @@ export default class Team extends baseStructures.Base {
   editNickname(userId: string, nickname: string) {
     return this.client.requestManager.editNickname(this.id, userId, nickname);
   }
+
+  /** Fetch the channels for this team */
+  fetchChannels(cache = true) {
+    return this.client.requestManager.fetchChannels(this.id, cache);
+  }
 }
 
 // TODO: HANDLE THIS BETTER
