@@ -45,7 +45,7 @@ export default class Collection<K, V> extends Map<K, V> {
   }
 
   filter(callback: (value: V, key: K) => boolean) {
-    const relevant = new Collection<K, V>();
+    const relevant = new Collection<K, V>(this.client);
     this.forEach((value, key) => {
       if (callback(value, key)) relevant.set(key, value);
     });
