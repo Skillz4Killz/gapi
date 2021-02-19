@@ -15,6 +15,17 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - Extremely flexible/dynamic!
 - Keep close to API as possible
 
+## Features 
+
+This list is completed features that are currently finished. The full feature list will only be ready when the TODO list is completed.
+
+- [x] Initial Connection
+  - [x] Handle closes/Reconnection
+- [x] Custom structures support
+  - [x] Add custom props
+  - [x] Remove undesired props to save RAM
+- [x] Basic Cache control
+
 # Usage
 
 ## Beginner/Basic
@@ -107,7 +118,7 @@ client.connect();
 - 100% API coverage
 - Custom(Redis) cache support
 - Proxy WS support
-- Proxy rest support
+- Proxy REST support
 - Step by step guide
 - GH Actions
   - Linter
