@@ -72,6 +72,10 @@ export default class Team extends baseStructures.Base {
   addRole(roleId: string, userId: string) {
     return this.client.requestManager.addRole(this.id, roleId, userId);
   }
+
+  removeRole(roleId: string, userId: string) {
+    return this.client.requestManager.removeRole(this.id, roleId, userId);
+  }
 }
 
 // TODO: HANDLE THIS BETTER
