@@ -101,7 +101,7 @@ export default class User extends baseStructures.Base {
           'profileBannerSm'
         ].includes(key)
       ) {
-        this.avatarHash = value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-'));
+        this.avatarHash = value ? value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-')) : undefined;
         continue;
       }
 
