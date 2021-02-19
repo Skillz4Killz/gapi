@@ -2,7 +2,6 @@ import EventEmitter from 'events';
 import { baseStructures } from './base';
 import Team from './lib/Team';
 import User from './lib/User';
-import { ENDPOINTS } from './rest/endpoints';
 import { structures } from './structures';
 import Shard from './websocket/Shard';
 
@@ -71,20 +70,9 @@ export default class Client extends EventEmitter {
     this.emit('debug', `[DEBUG] Disconnecting`, reason);
   }
 
-  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cache. */
-  async fetchUser(id: string, force = false) {
-    // IF IS CACHED JUST USE THAT
-    if (!force && this.users.has(id)) return this.users.get(id);
-
-    return this.requestManager.fetchUser(id);
-  }
-
-  /** Fetches a user. Set force to true, if you want to forcibly fetch from API and bypass cache. */
-  async fetchTeam(id: string, force = false) {
-    // IF IS CACHED JUST USE THAT
-    if (!force && this.teams.has(id)) return this.teams.get(id);
-
-    return this.requestManager.fetchTeam(id);
+  /** Edit the clients banner */
+  editBanner(url: string) {
+      return this.requestManager.editClientBanner(url);
   }
 }
 

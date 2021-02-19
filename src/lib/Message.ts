@@ -47,7 +47,29 @@ export default class Message extends baseStructures.Base {
   get createdAtISO() {
     return this.createdAt.toISOString();
   }
+
+  /** Remove a reaction on this message using the emoji id. */
+  removeReaction(id: string) {
+    return this.client.requestManager.removeReaction(this.channelId, this.id, id);
+  }
+
+  /** Add a reaction on this message using the emoji id */
+  addReaction(id: string) {
+    return this.client.requestManager.addReaction(this.channelId, this.id, id);
+  }
+
+  /** Add a reaction on this message using the emoji id. */
+  react(id: string) {
+    return this.addReaction(id);
+  }
+
+  /** Delete the message */
+  delete() {
+    return this.client.requestManager.deleteMessage(this.channelId, this.id);
+  }
+
 }
+
 
 export interface MessageData {}
 

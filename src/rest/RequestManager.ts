@@ -61,6 +61,11 @@ export default class RequestManager {
     return this.request(url, { method: 'PUT', ...body });
   }
 
+  /** Sends a delete request to the api. */
+  async delete(url: string, body?: Record<string, any>) {
+    return this.request(url, { method: 'DELETE', ...body });
+  }
+
   /** Creates the final request to be sent using headers and all necessary information for the api. */
   async request(
     url: string,
@@ -91,20 +96,58 @@ export default class RequestManager {
     return data.returnRaw ? request : await request.json().catch(console.error);
   }
 
+  // TEAM METHODS
+
+  /** Fetches a team. */
+  async fetchTeam(id: string) {
+    const team = await this.get(ENDPOINTS.team(id));
+    return this.client.teams.set(id, new structures.Team(this.client, team)).get(id);
+  }
+
+  async fetchCustomReactions(id: string, _force = false, _cache = true) {
+    // IF IT IS IN CACHE USE IT
+    // if (!force)
+
+    const data = await this.get(ENDPOINTS.customReactions(id));
+    // TODO: return structures instead
+    // const reactions = data.map(d => makeReaction)
+    return data;
+  }
+
+  // GROUP METHODS
+
+  /** Fetches all the groups for a team. */
+  async fetchGroups(id: string, cache = true) {
+    if (!cache) return this.get(ENDPOINTS.groups(id));
+
+    const groups = await this.get(ENDPOINTS.groups(id));
+    for (const _group of groups) {
+      // TODO: Create a group and cache it
+    }
+
+    // TODO: return cached structures instead
+    return groups;
+  }
+
   // MEMBER RELATED METHODS
+  /** Edit the nickname of a user */
   editNickname(teamId: string, userId: string, nickname: string) {
     return this.put(ENDPOINTS.nickname(teamId, userId), { nickname });
   }
 
-  // CHANNEL RELATED METHODS
-  async fetchChannels(teamId: string, cache = true) {
-    if (!cache) return this.get(ENDPOINTS.channels(teamId));
+  /** Accept an invite */
+  acceptInvite(id: string) {
+    return this.put(ENDPOINTS.invite(id), { type: 'consume' });
+  }
 
-    const channels = await this.get(ENDPOINTS.channels(teamId));
-    for (const _channel of channels) {
-      // TODO: Create channel based on type of channel
-      // this.client.channels.set(channel.id, new structures.Channel)
-    }
+  /** Add a role to a user */
+  addRole(teamId: string, roleId: string, userId: string) {
+    return this.put(ENDPOINTS.roleUser(teamId, roleId, userId));
+  }
+
+  /** Remove a role from a user */
+  removeRole(teamId: string, roleId: string, userId: string) {
+    return this.delete(ENDPOINTS.roleUser(teamId, roleId, userId));
   }
 
   /** Fetches a user. */
@@ -113,12 +156,71 @@ export default class RequestManager {
     return this.client.users.set(id, new structures.User(this.client, user)).get(id);
   }
 
-  /** Fetches a team */
-  async fetchTeam(id: string) {
-    const team = await this.get(ENDPOINTS.team(id));
-    return this.client.teams.set(id, new structures.Team(this.client, team)).get(id);
+  // CHANNEL RELATED METHODS
+  /** Fetch all the channels in a team. Set force to true to bypass cache and get the results from api. Set cache to false if you do not want to cache the channels once fetched. */
+  async fetchChannels(teamId: string, _force = false, cache = true) {
+    // TODO: enable this once channel structures are done
+    // if (!force && this.client.teams.get(teamId).channels.size) return this.client.teams.get(teamId).channels;
+
+    if (!cache) return this.get(ENDPOINTS.channels(teamId));
+
+    const channelData = await this.get(ENDPOINTS.channels(teamId));
+    return channelData;
+
+    // TODO: return the structures instead and cache the structurs
+    // return channelData.map(c => createChannel())
+  }
+
+  /** Edit a channels info */
+  editChannelInfo(
+    teamId: string,
+    groupId: string,
+    channelId: string,
+    options: { name?: string; description?: string; isPublic?: boolean } = {},
+  ) {
+    return this.put(ENDPOINTS.channelInfo(teamId, groupId, channelId), options);
+  }
+
+  // MESSAGE RELATED METHODS
+
+  /** Removes a reaction from a message */
+  removeReaction(channelId: string, messageId: string, id: string) {
+    return this.delete(ENDPOINTS.reaction(channelId, messageId, id));
+  }
+
+  /** Adds a reaction to a message */
+  addReaction(channelId: string, messageId: string, id: string) {
+    return this.post(ENDPOINTS.reaction(channelId, messageId, id));
+  }
+
+  /** Fetch all messages on a channel */
+  fetchMessages(id: string) {
+    return this.get(ENDPOINTS.messages(id));
+  }
+
+  /** Delete a message */
+  deleteMessage(channelId: string, id: string) {
+    return this.delete(ENDPOINTS.message(channelId, id));
+  }
+
+  /** Edit the clients banner */
+  editClientBanner(url: string) {
+    return this.post(ENDPOINTS.clientBanner, { imageUrl: url })
+  }
+
+  /** Edit the clients presence */
+  editPresence(status: PresenceStatuses | keyof typeof PresenceStatuses) {
+    return this.post(ENDPOINTS.clientPresence, { status: typeof status === "string" ? PresenceStatuses[status] : status })
   }
 }
+
+export enum PresenceStatuses {
+  ONLINE = 1,
+  IDLE,
+  DO_NOT_DISTURB,
+  INVISIBLE
+}
+
 
 // TODO: THIS COULD BE BETTER
 export interface GuildedClientData {

@@ -55,8 +55,22 @@ export default class Team extends baseStructures.Base {
   }
 
   /** Fetch the channels for this team */
-  fetchChannels(cache = true) {
-    return this.client.requestManager.fetchChannels(this.id, cache);
+  fetchChannels(force = false, cache = true) {
+    return this.client.requestManager.fetchChannels(this.id, force, cache);
+  }
+
+  /** Fetch the groups for this team */
+  fetchGroups(cache = true) {
+    return this.client.requestManager.fetchGroups(this.id, cache);
+  }
+
+  fetchCustomReactions(force = false, cache = true) {
+    return this.client.requestManager.fetchCustomReactions(this.id, force, cache);
+  }
+
+  /** Add a role to a member */
+  addRole(roleId: string, userId: string) {
+    return this.client.requestManager.addRole(this.id, roleId, userId);
   }
 }
 
