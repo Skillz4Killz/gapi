@@ -18,6 +18,8 @@ export default class Client extends EventEmitter {
   imageDefaultWidth = 128;
   /** The default image height used for image getters */
   imageDefaultHeight = 128;
+  /** The maximum amount of times to restart a shard by default */
+  maxReconnectionAttempts = Infinity;
 
   /** All the users currently cached/accessible to the client. */
   users = new baseStructures.Collection<string, User>(this);

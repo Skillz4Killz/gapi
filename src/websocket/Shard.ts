@@ -30,13 +30,18 @@ export default class Shard extends EventEmitter {
   /** Reconnection attempts used up for this shard. */
   reconnectionAttempts = 0;
   /** The maximum allowed attempts to reconnect */
-  maxReconnectionAttempts = 0;
+  maxReconnectionAttempts = Infinity;
 
-  constructor(id: string, client: Client, options?: { reconnectionAttempt?: number; maxReconnectionAttempts?: number  }) {
+  constructor(
+    id: string,
+    client: Client,
+    options?: { reconnectionAttempt?: number; maxReconnectionAttempts?: number },
+  ) {
     super();
     this.client = client;
     this.id = id;
     if (options?.reconnectionAttempt) this.reconnectionAttempts = options.reconnectionAttempt;
+    this.maxReconnectionAttempts = options?.maxReconnectionAttempts || this.client.maxReconnectionAttempts;
     if (options?.maxReconnectionAttempts) this.maxReconnectionAttempts = options.maxReconnectionAttempts;
 
     // PREVENT DUMB CLASS/THIS BINDING ISSUE
@@ -190,7 +195,12 @@ export default class Shard extends EventEmitter {
     // DELETE THE CURRENT EVENT EMITTER
     this.client.websocketManager.delete(this.id);
     // RECONNECT THE SHARD AGAIN
-    this.client.websocketManager.connect(new Shard(this.id, this.client));
+    this.client.websocketManager.connect(
+      new Shard(this.id, this.client, {
+        reconnectionAttempt: this.reconnectionAttempts,
+        maxReconnectionAttempts: this.maxReconnectionAttempts,
+      }),
+    );
   }
 
   /** Sends a heartbeat to the websocket and rest to maintain the connection */
