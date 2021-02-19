@@ -24,7 +24,7 @@ export default class GuildedEvents {
 
   /** Handler for whenever a message is created by any user. */
   ChatMessageCreated(payload: any, id: string) {
-    this.client.emit('messageCreate', new Message(this.client, payload), id);
+    this.client.emit('messageCreated', new Message(this.client, payload), id);
   }
 
   /** Handler for whenever a reaction was added to a message by any user. */
@@ -38,55 +38,51 @@ export default class GuildedEvents {
   }
 
   /** Handler for when a user removes a reaction. */
-  ChatMessageReactionDeleted(payload: GuildedReactionDeleted, id: string) {
+  ChatMessageReactionDeleted(payload: any, id: string) {
     this.client.emit('reactionRemoved', payload, id);
   }
 
   /** Handler for when a user edits a message. */
-  ChatMessageUpdated(payload: GuildedMessageUpdated, id: string) {
-    this.client.emit('messageEdit', payload, id);
+  ChatMessageUpdated(payload: any, id: string) {
+    this.client.emit('messageEdited', payload, id);
   }
 
   /** Handler for when a user deletes a message */
-  GuildedMessageDeleted(payload: GuildedMessageDeleted, id: string) {
-    this.client.emit('messageDelete', payload, id);
+  ChatMessageDeleted(payload: any, id: string) {
+    this.client.emit('messageDeleted', payload, id);
   }
-}
 
-export type ChannelTypes = 'Team';
-export type ContentTypes = 'chat';
+  ChatChannelUpdated(payload: any, id: string) {
+    this.client.emit('channelEdited', payload, id);
+  }
 
-export interface GuildedEventBase {
-  type: string;
-  channelId: string;
-  channelCategoryId: number;
-  channelType: ChannelTypes;
-  teamId: string;
-  contentType: ContentTypes;
-}
+  CHANNEL_SEEN(payload: any, id: string) {
+    this.client.emit('channelSeen', payload, id);
+  }
 
-export interface GuildedReactionDeleted extends GuildedEventBase {
-  type: 'ChatMessageReactionDeleted';
-  guildedClientId: string;
-  reaction: { customReactionId: number; createdBy: string };
-  message: { id: string };
-}
+  TEAM_CHANNEL_CONTENT_CREATED(payload: any, id: string) {
+    this.client.emit('teamChannelContentCreated', payload, id);
+  }
 
-export interface GuildedMessageUpdated extends GuildedEventBase {
-  type: 'ChatMessageUpdated';
-  guildedClientId: string;
-  updatedBy: string;
-  contentId: string;
-  message: {
-    id: string;
-    content: { object: 'value'; document: {}[] };
-    editedAt: string;
-  };
-}
+  UserStreamsVisibilityUpdated(payload: any, id: string) {
+    this.client.emit('userStreamsVisibilityEdited', payload, id);
+  }
 
-export interface GuildedMessageDeleted extends GuildedEventBase {
-  type: 'ChatMessageDeleted',
-  message: { id: string; }
+  StageUpdated(payload: any, id: string) {
+    this.client.emit('stageEdited', payload, id);
+  }
+
+  TemporalChannelCreated(payload: any, id: string) {
+    this.client.emit('threadCreated', payload, id);
+  }
+
+  TemporalChannelUsersAdded(payload: any, id: string) {
+    this.client.emit('threadUserAdded', payload, id);
+  }
+
+  TEAM_CHANNEL_ARCHIVED(payload: any, id: string) {
+    this.client.emit('teamChannelArchived', payload, id);
+  }
 }
 
 export type GuildedEventNames =
@@ -212,4 +208,5 @@ export type GuildedEventNames =
   | 'TEAM_USER_GROUP_PRIORITIES_UPDATED'
   | 'TEAM_GROUP_MARKED_AS_READ'
   | 'USER_MEDIA_UPLOAD_PROGRESS'
-  | 'VoiceChannelRegionPingRepor';
+  | 'VoiceChannelRegionPingReport'
+  | "StageUpdated";
