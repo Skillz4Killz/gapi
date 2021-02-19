@@ -153,4 +153,4 @@ export type GuildedEventNames =
   "TEAM_USER_GROUP_PRIORITIES_UPDATED" |
   "TEAM_GROUP_MARKED_AS_READ" |
   "USER_MEDIA_UPLOAD_PROGRESS" |
-  "VoiceChannelRegionPingRepor";
+  "VoiceChannelRegionPingReport";
