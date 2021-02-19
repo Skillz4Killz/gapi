@@ -76,7 +76,7 @@ export default class RequestManager {
     },
   ) {
     // TODO: make it an event
-    console.log(url, data);
+    this.client.emit('rawREST', url, data);
 
     const request = await fetch(url, {
       method: data.method,
@@ -89,9 +89,6 @@ export default class RequestManager {
         ...(['GET', 'DELETE'].includes(data.method) ? {} : { 'Content-Type': 'application/json' }),
       },
     });
-
-    if (request.status < 200 || request.status > 299) {
-    }
 
     return data.returnRaw ? request : await request.json().catch(console.error);
   }
