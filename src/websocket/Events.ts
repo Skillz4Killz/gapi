@@ -46,6 +46,11 @@ export default class GuildedEvents {
   ChatMessageUpdated(payload: GuildedMessageUpdated, id: string) {
     this.client.emit('messageEdit', payload, id);
   }
+
+  /** Handler for when a user deletes a message */
+  GuildedMessageDeleted(payload: GuildedMessageDeleted, id: string) {
+    this.client.emit('messageDelete', payload, id);
+  }
 }
 
 export type ChannelTypes = 'Team';
@@ -53,7 +58,6 @@ export type ContentTypes = 'chat';
 
 export interface GuildedEventBase {
   type: string;
-  guildedClientId: string;
   channelId: string;
   channelCategoryId: number;
   channelType: ChannelTypes;
@@ -63,12 +67,14 @@ export interface GuildedEventBase {
 
 export interface GuildedReactionDeleted extends GuildedEventBase {
   type: 'ChatMessageReactionDeleted';
+  guildedClientId: string;
   reaction: { customReactionId: number; createdBy: string };
   message: { id: string };
 }
 
 export interface GuildedMessageUpdated extends GuildedEventBase {
   type: 'ChatMessageUpdated';
+  guildedClientId: string;
   updatedBy: string;
   contentId: string;
   message: {
@@ -76,6 +82,11 @@ export interface GuildedMessageUpdated extends GuildedEventBase {
     content: { object: 'value'; document: {}[] };
     editedAt: string;
   };
+}
+
+export interface GuildedMessageDeleted extends GuildedEventBase {
+  type: 'ChatMessageDeleted',
+  message: { id: string; }
 }
 
 export type GuildedEventNames =
