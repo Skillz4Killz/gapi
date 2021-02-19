@@ -18,19 +18,27 @@ export default class GuildedEvents {
   }
 
   // TODO: WHAT ON EARTH IS THIS?
-  USER_PINGED(payload: any) {
-    this.client.emit('userPinged', payload);
+  USER_PINGED(payload: any, id: string) {
+    this.client.emit('userPinged', payload, id);
   }
 
   /** Handler for whenever a message is created by any user. */
-  ChatMessageCreated(payload: any) {
-    this.client.emit('messageCreate', new Message(this.client, payload));
+  ChatMessageCreated(payload: any, id: string) {
+    this.client.emit('messageCreate', new Message(this.client, payload), id);
+  }
+
+  /** Handler for whenever a reaction was added to a message by any user. */
+  ChatMessageReactionAdded(payload: any, id: string) {
+    this.client.emit('reactionAdded', payload, id);
+  }
+  
+  /** Handler for when a user types in a channel */
+  ChatChannelTyping(payload: any, id: string) {
+    this.client.emit('typing', payload, id);
   }
 }
 
 export type GuildedEventNames = 
-  "USER_PINGED" | 
-  "ChatMessageCreated" |
   "DMChatChannelCreated" |
   "ChatChannelBroadcastCall" |
   "ChatChannelBroadcastCallResponse" |
