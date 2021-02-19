@@ -2,6 +2,8 @@ export * from "./src/Client";
 
 export * from "./src/lib/Base";
 export * from "./src/lib/Message";
+export * from "./src/lib/Team";
+export * from "./src/lib/User";
 
 export * from "./src/rest/RequestManager";
 export * from "./src/rest/endpoints";
