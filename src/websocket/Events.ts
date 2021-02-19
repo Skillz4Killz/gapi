@@ -37,8 +37,14 @@ export default class GuildedEvents {
     this.client.emit('typing', payload, id);
   }
 
+  /** Handler for when a user removes a reaction. */
   ChatMessageReactionDeleted(payload: GuildedReactionDeleted, id: string) {
     this.client.emit('reactionRemoved', payload, id);
+  }
+
+  /** Handler for when a user edits a message. */
+  ChatMessageUpdated(payload: GuildedMessageUpdated, id: string) {
+    this.client.emit('messageEdit', payload, id);
   }
 }
 
