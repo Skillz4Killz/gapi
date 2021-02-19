@@ -4,7 +4,9 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 > Currently unstable and in active dev. Use with caution.
 
-> The name is gapi but silly google took that name so on npm we use gupi!
+> The name is gapi but silly google took that name so on npm we use gupi
+
+## This lib is not being built to be used! It is an experiment for me to learn and grow as a developer.
 
 # Design Goals
 
@@ -20,13 +22,14 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 ```ts
 import { Client } from 'gupi';
 
-const client = new Client({ email: 'emailhere', password: 'passwordhere' })
+new Client({ email: 'emailhere', password: 'passwordhere' })
   .on('ready', () => console.log('Successfully connected to gateway'))
   .on('messageCreate', message => {
     if (message.content === '!ping') {
       // TODO: pending
     }
   })
+  .on('unknown', console.log)
   .connect();
 ```
 
