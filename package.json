@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build-watch": "tsc --watch",
     "prepack": "tsc --declaration",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish"
