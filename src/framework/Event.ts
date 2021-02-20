@@ -15,6 +15,7 @@ export default class Event {
         this.client.events.set(this.name, this);
     }
 
+    // @ts-ignore
     async execute(...args: any[]) {
         // Placeholder for the execution handler for any event.
     }
