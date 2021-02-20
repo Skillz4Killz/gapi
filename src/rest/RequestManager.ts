@@ -195,6 +195,11 @@ export default class RequestManager {
     return this.get(ENDPOINTS.messages(id));
   }
 
+  /** Send a message to a channel */
+  sendMessage(channelId: string, content: any) {
+    return this.post(ENDPOINTS.messages(channelId), { body: content });
+  }
+
   /** Delete a message */
   deleteMessage(channelId: string, id: string) {
     return this.delete(ENDPOINTS.message(channelId, id));
