@@ -68,10 +68,34 @@ export default class Message extends baseStructures.Base {
     return this.client.requestManager.deleteMessage(this.channelId, this.id);
   }
 
+  /** Send a message to the channel where this message was sent */
+  send(content: string) {
+    return this.client.requestManager.sendMessage(this.channelId, {
+        confirmed: false,
+        messageId: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        }),
+        content: { object: 'value', document: {
+          object: 'document',
+          data: {},
+          nodes: [
+            {
+              object: 'block', type: 'paragraph', data: {}, nodes: [{
+                object: 'text',
+                leaves: [
+                  { object: 'leaf', text: content, marks: [] }
+                ]
+              }]
+            }
+          ]
+        },
+      },
+    });
+  }
 }
 
-
-export interface MessageData {}
+export interface MessageNodeData {}
 
 export interface MessageLeaf {
   object: string;
@@ -87,13 +111,13 @@ export interface MessageInnerNode {
 export interface MessageNode {
   object: string;
   type: string;
-  data: MessageData;
+  data: MessageNodeData;
   nodes: MessageInnerNode[];
 }
 
 export interface MessageDocument {
   object: string;
-  data: MessageData;
+  data: MessageNodeData;
   nodes: MessageNode[];
 }
 
