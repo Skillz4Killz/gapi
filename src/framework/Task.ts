@@ -7,6 +7,8 @@ export default class Task {
     name: string;
     /** The interval to run this task in milliseconds. By default, this is 1 minute. */
     intervalMilliseconds = 60000;
+    /** Whether or not this task should be executed as soon as bot is starting up. */
+    executeOnStartup = false;
 
     constructor(client: BotClient, name: string) {
         this.client = client;
