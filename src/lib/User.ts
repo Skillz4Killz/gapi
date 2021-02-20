@@ -14,13 +14,13 @@ export default class User extends baseStructures.Base {
   steamId!: string;
   userStatus = {
     content: '',
-    customReactionId: ''
+    customReactionId: '',
   };
   subdomain!: string;
   moderationStatus!: string;
   aboutInfo!: string;
   lastOnline!: string;
-  aliases!: string[];
+  aliases!: UserAlias[];
   email!: string;
   serviceEmail!: string;
 
@@ -57,8 +57,8 @@ export default class User extends baseStructures.Base {
       height?: number;
       type?: 'Small' | 'Medium' | 'Large';
     } = {
-      type: 'Medium'
-    }
+      type: 'Medium',
+    },
   ) {
     if (options.type) return `https://img.guildedcdn.com/UserAvatar/${this.avatarHash}-${options.type}.png`;
     return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserAvatar/${this.avatarHash}-${
@@ -78,8 +78,8 @@ export default class User extends baseStructures.Base {
       height?: number;
       type?: 'Small' | 'Medium' | 'Large';
     } = {
-      type: 'Medium'
-    }
+      type: 'Medium',
+    },
   ) {
     if (options.type) return `https://img.guildedcdn.com/UserBanner/${this.bannerHash}-${options.type}.png`;
     return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserBanner/${this.bannerHash}-${
@@ -98,7 +98,7 @@ export default class User extends baseStructures.Base {
           'profilePictureBlur',
           'profileBannerBlur',
           'profileBannerLg',
-          'profileBannerSm'
+          'profileBannerSm',
         ].includes(key)
       ) {
         this.avatarHash = value ? value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-')) : undefined;
@@ -135,9 +135,38 @@ export interface GuildedUser {
   };
   subdomain: string;
   moderationStatus: string;
-  aboutInfo: string;
+  aboutInfo: UserAboutInfo;
   lastOnline: string;
-  aliases: string[];
+  aliases: UserAlias[];
   email: string;
   serviceEmail: string;
+}
+
+export interface UserAlias {
+  alias?: string;
+  discriminator: null | string;
+  name: string;
+  createdAt?: string;
+  userId?: string;
+  gameId: number;
+  socialLinkSource: SocialLinkSources | null;
+  additionalInfo: unknown;
+  editedAt?: string;
+  playerInfo: unknown;
+}
+
+export type SocialLinkSources =
+  | 'bnet'
+  | 'discord'
+  | 'psn'
+  | 'steam'
+  | 'switch'
+  | 'twitch'
+  | 'twitter'
+  | 'xbox'
+  | 'youtube';
+
+export interface UserAboutInfo {
+    bio?: string;
+    tagLine?: string;
 }
