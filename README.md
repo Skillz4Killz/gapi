@@ -25,7 +25,10 @@ This list is completed features that are currently finished. The full feature li
   - [x] Add custom props
   - [x] Remove undesired props to save RAM
 - [x] Basic Cache control
-
+- [x] Clean and powerful events system
+  - [x] Event listeners that are ran when an event occurs.
+  - [x] Useful events available to help debug!
+  
 # Usage
 
 ## Beginner/Basic
@@ -96,9 +99,6 @@ client.connect();
     - Command aliases.
     - Cooldowns and allowed uses before cooldown triggers.
     - Author and bot permission checks in server AND in channel!
-  - Clean and powerful events system
-    - Event listeners that are ran when an event occurs.
-    - Useful events available to help debug!
   - Clean and powerful inhibitors system
     - Stops a command from running if a requirement fails.
     - Easily add custom inhibitors!
