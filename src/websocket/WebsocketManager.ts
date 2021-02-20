@@ -3,7 +3,7 @@ import Client from '../Client';
 import { BASE_URL } from '../rest/endpoints';
 import Shard from './Shard';
 
-export default class WebsocketManager extends baseStructures.Collection<number, Shard> {
+export default class WebsocketManager extends baseStructures.Collection<string, Shard> {
   /** The client itself */
   client: Client;
   /** The base websocket url */
@@ -16,6 +16,7 @@ export default class WebsocketManager extends baseStructures.Collection<number, 
 
   /** Connects to the Guilded gateway websocket if possible. */
   connect(shard: Shard) {
+    this.set(shard.id, shard);
     shard.connect();
   }
 }

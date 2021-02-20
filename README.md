@@ -4,7 +4,9 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 > Currently unstable and in active dev. Use with caution.
 
-> The name is gapi but silly google took that name so on npm we use gupi!
+> The name is gapi but silly google took that name so on npm we use gupi
+
+## This lib is not being built to be used! It is an experiment for me to learn and grow as a developer.
 
 # Design Goals
 
@@ -13,6 +15,20 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - Extremely flexible/dynamic!
 - Keep close to API as possible
 
+## Features 
+
+This list is completed features that are currently finished. The full feature list will only be ready when the TODO list is completed.
+
+- [x] Initial Connection
+  - [x] Handle closes/Reconnection
+- [x] Custom structures support
+  - [x] Add custom props
+  - [x] Remove undesired props to save RAM
+- [x] Basic Cache control
+- [x] Clean and powerful events system
+  - [x] Event listeners that are ran when an event occurs.
+  - [x] Useful events available to help debug!
+  
 # Usage
 
 ## Beginner/Basic
@@ -20,13 +36,14 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 ```ts
 import { Client } from 'gupi';
 
-const client = new Client({ email: 'emailhere', password: 'passwordhere' })
+new Client({ email: 'emailhere', password: 'passwordhere' })
   .on('ready', () => console.log('Successfully connected to gateway'))
   .on('messageCreate', message => {
     if (message.content === '!ping') {
       // TODO: pending
     }
   })
+  .on('unknown', console.log)
   .connect();
 ```
 
@@ -82,10 +99,6 @@ client.connect();
     - Command aliases.
     - Cooldowns and allowed uses before cooldown triggers.
     - Author and bot permission checks in server AND in channel!
-  - Clean and powerful events system
-    - Event listeners that are ran when an event occurs.
-    - Easily reloadable!
-    - Useful events available to help debug!
   - Clean and powerful inhibitors system
     - Stops a command from running if a requirement fails.
     - Easily add custom inhibitors!
@@ -104,7 +117,7 @@ client.connect();
 - 100% API coverage
 - Custom(Redis) cache support
 - Proxy WS support
-- Proxy rest support
+- Proxy REST support
 - Step by step guide
 - GH Actions
   - Linter

@@ -39,7 +39,7 @@ export default class Team extends baseStructures.Base {
     // LOOP OVER ALL OPTIONS OBJECT AND ASSIGN THE VALUE TO THE CLIENT
     for (const [key, value] of Object.entries(payload)) {
       if (['homeBannerImageSm', 'homeBannerImageMd', 'homeBannerImageLg'].includes(key)) {
-        this.hash = value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-'));
+        this.hash = value ? value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-')) : undefined;
         continue;
       }
 

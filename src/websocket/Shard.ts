@@ -14,7 +14,7 @@ export default class Shard extends EventEmitter {
   /** Whether or not this shard is currently connecting */
   isConnecting = false;
   /** The current status of this shard */
-  status: 'connecting' | 'handshaking' | 'resuming' | 'pending' = 'pending';
+  status: 'connecting' | 'handshaking' | 'resuming' | 'disconnected' = 'disconnected';
   /** Whether or not the heartbeat received was acknowledged */
   lastHeartbeatAck = false;
   /** The connection timeout */
@@ -27,12 +27,22 @@ export default class Shard extends EventEmitter {
   lastHeartbeatSent = 0;
   ws: WebSocket | undefined;
   sessionID = '';
+  /** Reconnection attempts used up for this shard. */
+  reconnectionAttempts = 0;
+  /** The maximum allowed attempts to reconnect */
+  maxReconnectionAttempts = Infinity;
 
-  constructor(id: string, client: Client) {
+  constructor(
+    id: string,
+    client: Client,
+    options?: { reconnectionAttempt?: number; maxReconnectionAttempts?: number },
+  ) {
     super();
     this.client = client;
-
     this.id = id;
+    if (options?.reconnectionAttempt) this.reconnectionAttempts = options.reconnectionAttempt;
+    this.maxReconnectionAttempts = options?.maxReconnectionAttempts || this.client.maxReconnectionAttempts;
+    if (options?.maxReconnectionAttempts) this.maxReconnectionAttempts = options.maxReconnectionAttempts;
 
     // PREVENT DUMB CLASS/THIS BINDING ISSUE
     this.onShardOpen = this.onShardOpen.bind(this);
@@ -63,8 +73,8 @@ export default class Shard extends EventEmitter {
 
     this.ws = new WebSocket(this.url, {
       headers: {
-        cookie: `hmac_signed_session=${this.client.requestManager.hmacSignedSession}`
-      }
+        cookie: `hmac_signed_session=${this.client.requestManager.hmacSignedSession}`,
+      },
     });
     this.ws.on('open', this.onShardOpen);
     this.ws.on('message', this.onShardMessage);
@@ -89,7 +99,7 @@ export default class Shard extends EventEmitter {
   /** Handler for whenever a shard emits message event */
   onShardMessage(data: WebSocket.Data) {
     try {
-      console.log(data);
+      // console.log(data);
       const code = data.toString().match(/[0-9]+/)?.[0];
       if (!code) return;
 
@@ -151,17 +161,46 @@ export default class Shard extends EventEmitter {
       'debug',
       `[DEBUG] Shard disconnected`,
       this.id,
-      `With code ${code} because of: ${reason || 'Unknown reason.'}`
+      `With code ${code} because of: ${reason || 'Unknown reason.'}`,
     );
     this.emit('shardClosed', this.id, code, reason);
-    console.log(code, reason);
+    // TODO: Remove this extra log, for debugging only
+    console.log('shard closed', code, reason);
     this.disconnect();
   }
 
   /** Handle disconnection of the shard when necessary */
   disconnect(reconnect = true) {
-    // TODO: handle reconnecting
-    console.log('disconnected', reconnect);
+    // IMMEDIATELY STOP HEARTBEATING
+    if (this.heartbeatInterval) {
+      clearInterval(this.heartbeatInterval);
+      this.heartbeatInterval = undefined;
+    }
+
+    // HANDLE IF IT HAS NOT BEEN CLOSED ALREADY
+    if (this.ws && this.ws.readyState !== WebSocket.CLOSED) {
+      // REMOVE THE LISTENER TO PREVENT INFINITE LOOP
+      this.ws?.removeListener('close', this.onShardClose);
+
+      if (reconnect && this.sessionID) {
+        if (this.ws.readyState === WebSocket.OPEN) this.ws.close(4901, 'Reconnect with session id please');
+        else this.ws.terminate();
+      } else this.ws.close(1000, 'Clean close with no reconnection.');
+    }
+
+    // PREVENT INFINITE REATTEMPTS
+    if (this.reconnectionAttempts >= this.maxReconnectionAttempts) return;
+    this.reconnectionAttempts++;
+
+    // DELETE THE CURRENT EVENT EMITTER
+    this.client.websocketManager.delete(this.id);
+    // RECONNECT THE SHARD AGAIN
+    this.client.websocketManager.connect(
+      new Shard(this.id, this.client, {
+        reconnectionAttempt: this.reconnectionAttempts,
+        maxReconnectionAttempts: this.maxReconnectionAttempts,
+      }),
+    );
   }
 
   /** Sends a heartbeat to the websocket and rest to maintain the connection */
