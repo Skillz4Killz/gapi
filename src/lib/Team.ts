@@ -4,6 +4,8 @@ import Client from '../Client';
 export default class Team extends baseStructures.Base {
   /** The unique hash for this teams banner. */
   hash = '';
+  /** The name of the team */
+  name!: string;
 
   // TODO: fill these
   members = new baseStructures.Collection(this.client);
