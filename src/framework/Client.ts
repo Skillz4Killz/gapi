@@ -1,3 +1,4 @@
+import path from 'path';
 import { baseStructures } from '../base';
 import Client, { ClientOptions } from '../Client';
 import Message from '../lib/Message';
@@ -46,8 +47,12 @@ export default class BotClient extends Client {
         ['monitors', this.monitors] as const,
         ['tasks', this.tasks] as const,
       ].map(async ([dir, collection]) => {
-        for await (const [name, file] of walk(`./internals/${dir}/`)) {
-          const piece = new file(this, name);
+        for await (const result of walk(path.join(__dirname, `./internal/${dir}/`))) {
+          if (!result) return;
+
+          const [filename, file] = result;
+          const name = filename.substring(0, filename.length - 2);
+          const piece = file.default ? new file.default(this, name) : new file(this, name);
           collection.set(piece.name || name, piece);
         }
       }),
@@ -72,6 +77,8 @@ export default class BotClient extends Client {
       // IGNORE DMS
       // TODO: figure out how to detect dms
       // if (monitor.ignoreDM && !message.teamId) return;
+
+      monitor.execute(message);
     });
   }
 
