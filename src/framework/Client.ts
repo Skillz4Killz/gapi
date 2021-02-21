@@ -2,27 +2,35 @@ import { baseStructures } from '../base';
 import Client, { ClientOptions } from '../Client';
 import Message from '../lib/Message';
 import { bgBlue, bgYellow, black } from '../utils/colorette';
+import Argument from './Argument';
 import { Command } from './Command';
 import Event from './Event';
+import Inhibitor from './Inhibitor';
 import Monitor from './Monitor';
 import Task from './Task';
 
 export default class BotClient extends Client {
   /** All your bot's arguments will be available here. */
-  arguments = new baseStructures.Collection(this);
+  arguments = new baseStructures.Collection<string, Argument>(this);
   /** All your bot commands will be available here */
   commands = new baseStructures.Collection<string, Command>(this);
   /** All your bot's events will be available here. */
   events = new baseStructures.Collection<string, Event>(this);
   /** All your bot's inhibitors will be available here. */
-  inhibitors = new baseStructures.Collection(this);
+  inhibitors = new baseStructures.Collection<string, Inhibitor>(this);
   /** All your bot's monitors will be available here */
   monitors = new baseStructures.Collection<string, Monitor>(this);
   /** All your bot's tasks will be available here. */
   tasks = new baseStructures.Collection<string, Task>(this);
+  /** The bot's default prefix */
+  prefix: string;
+  /** The bot's prefixes per team. <teamId, prefix> */
+  prefixes = new Map<string, string>();
 
   constructor(options: BotClientOptions) {
     super(options);
+
+    this.prefix = options.prefix;
 
     this.init();
   }
@@ -91,6 +99,12 @@ export default class BotClient extends Client {
     }
 
     return `${hour >= 10 ? hour : `0${hour}`}:${minute >= 10 ? minute : `0${minute}`} ${amOrPm}`;
+  }
+
+  /** Handler that can be customized by user that runs whenever a command errors out. */
+  handleCommandError(message: Message, command: Command, error: any) {
+    // PLACEHOLDER JUST TO SHUT UP THE ERRORS. THIS SHOULD BE CUSTOMIZED BY USER
+    if (!message) console.log('command failed', command, error);
   }
 }
 
