@@ -7,7 +7,7 @@ export class Command {
   /** The client itself */
   client: BotClient;
   /** The name of the command. */
-  name: string;
+  name = "";
   /** The aliases for this command. */
   aliases: string[] = [];
   /** The description of the command. Can also be a function in case it needs to be translated or such. */
@@ -37,7 +37,7 @@ export class Command {
 
   constructor(client: BotClient, name: string) {
     this.client = client;
-    this.name = name;
+    if (!this.name) this.name = name;
     this.subcommands = new baseStructures.Collection<string, Command>(this.client);
 
     this.client.commands.set(name, this);

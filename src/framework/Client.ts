@@ -2,6 +2,7 @@ import { baseStructures } from '../base';
 import Client, { ClientOptions } from '../Client';
 import Message from '../lib/Message';
 import { bgBlue, bgYellow, black } from '../utils/colorette';
+import { walk } from '../utils/walk';
 import Argument from './Argument';
 import { Command } from './Command';
 import Event from './Event';
@@ -36,8 +37,22 @@ export default class BotClient extends Client {
   }
 
   /** Load all the files for the bot. */
-  init() {
-    // TODO: Load all internal files
+  async init() {
+    await Promise.all(
+      [
+        ['arguments', this.arguments] as const,
+        ['commands', this.commands] as const,
+        ['inhibitors', this.inhibitors] as const,
+        ['monitors', this.monitors] as const,
+        ['tasks', this.tasks] as const,
+      ].map(async ([dir, collection]) => {
+        for await (const [name, file] of walk(`./internals/${dir}/`)) {
+          const piece = new file(this, name);
+          collection.set(piece.name || name, piece);
+        }
+      }),
+    );
+
     // TODO: Load all end user files
 
     this.initializeMessageListener();
