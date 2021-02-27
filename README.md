@@ -2,12 +2,9 @@
 
 <iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fbadge%2FwlVw0dJE" width="209" height="32" frameborder="0" scrolling="no"></iframe>
 
-
 <iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fteamcard%2FwlVw0dJE" width="268" height="380" frameborder="0" scrolling="no"></iframe>
 
-
 <iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fteamcard%2FwlVw0dJE&size=large" width="553" height="262" frameborder="0" scrolling="no"></iframe>
-
 
 [![CI](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml/badge.svg)](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml)
 ![npm](https://img.shields.io/npm/v/gupi)
