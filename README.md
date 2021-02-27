@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml/badge.svg)](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml)
 ![npm](https://img.shields.io/npm/v/gupi)
-[![Guilded](https://img.shields.io/badge/Guilded%20Server-Need%20Help%3F-yellow)](https://www.guilded.gg/i/Vkb5LVP2)
+[![Guilded](https://img.shields.io/badge/Guilded%20Server-Click%20To%20Join!%3F-yellow)](https://www.guilded.gg/i/Vkb5LVP2)
 
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
