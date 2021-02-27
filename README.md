@@ -1,13 +1,8 @@
 # gapi / gupi
 
-<iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fbadge%2FwlVw0dJE" width="209" height="32" frameborder="0" scrolling="no"></iframe>
-
-<iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fteamcard%2FwlVw0dJE" width="268" height="380" frameborder="0" scrolling="no"></iframe>
-
-<iframe src="https://www.guilded.gg/canvas_index.html?route=%2Fcanvas%2Fembed%2Fteamcard%2FwlVw0dJE&size=large" width="553" height="262" frameborder="0" scrolling="no"></iframe>
-
 [![CI](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml/badge.svg)](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml)
 ![npm](https://img.shields.io/npm/v/gupi)
+[![Guilded](https://img.shields.io/badge/Guilded%20Server-Need%20Help%3F-yellow)](https://www.guilded.gg/i/Vkb5LVP2)
 
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
