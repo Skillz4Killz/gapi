@@ -17,7 +17,7 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - Extremely flexible/dynamic!
 - Keep close to API as possible
 
-## Features 
+## Features
 
 This list is completed features that are currently finished. The full feature list will only be ready when the TODO list is completed.
 
@@ -34,7 +34,7 @@ This list is completed features that are currently finished. The full feature li
   - [x] Linter
   - [x] Prettier
   - [x] TSC
-  
+
 # Usage
 
 ## Beginner/Basic
