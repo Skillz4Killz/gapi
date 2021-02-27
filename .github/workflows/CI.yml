@@ -41,6 +41,10 @@ jobs:
         only_changed: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run eslint with reviewdog
+      uses: reviewdog/action-eslint@v1.0.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        fail_on_error: true
     - run: npm ci
     - run: npm build --if-present
-    - run: npm lint --if-present
