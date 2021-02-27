@@ -131,7 +131,6 @@ client.connect();
 - Step by step guide
 - GH Actions
   - Deploy on release
-- Readme badges
 - Readme image/logo??
 - Event Handlers
   - DMChatChannelCreated
