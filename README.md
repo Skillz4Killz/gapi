@@ -1,5 +1,7 @@
 # gapi / gupi
 
+[![Lint / Prettier / TSC](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml/badge.svg)](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml)
+
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 ![image](https://img.guildedcdn.com/ContentMedia/cddfebfa0ca84afd72f2a6bdc55bb158-Full.webp?w=713&h=130)
