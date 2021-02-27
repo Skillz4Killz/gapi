@@ -30,6 +30,10 @@ This list is completed features that are currently finished. The full feature li
 - [x] Clean and powerful events system
   - [x] Event listeners that are ran when an event occurs.
   - [x] Useful events available to help debug!
+- [x] GH Actions
+  - [x] Linter
+  - [x] Prettier
+  - [x] TSC
   
 # Usage
 
@@ -122,9 +126,6 @@ client.connect();
 - Proxy REST support
 - Step by step guide
 - GH Actions
-  - Linter
-  - Prettier
-  - TSC
   - Deploy on release
 - Readme badges
 - Readme image/logo??
