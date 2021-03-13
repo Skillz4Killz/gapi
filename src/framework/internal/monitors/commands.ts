@@ -168,6 +168,31 @@ export default class extends Monitor {
       } else if (command.subcommands?.has(parameters[0]!)) {
         continue;
       } else if (argument.required !== false) {
+        // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
+        const question = await message
+          .send(
+            message.translate(message.teamId, 'strings:MISSING_REQUIRED_ARG', {
+              name: argument.name,
+              type:
+                argument.type === 'subcommand'
+                  ? command.subcommands?.map(sub => sub.name).join(', ') || 'subcommand'
+                  : argument.type,
+            }),
+          )
+          .catch(console.log);
+        if (question) {
+          const response = await message.awaitMessage(message.authorId, message.channelId).catch(console.log);
+          if (response) {
+            const responseArg = await resolver.execute([response.content], message, command, argument);
+            if (responseArg) {
+              args[argument.name] = responseArg;
+              params.shift();
+              await message.channel.messages.delete([question.id, response.id]).catch(console.log);
+              continue;
+            }
+          }
+        }
+
         missingRequiredArg = true;
         argument.missing?.(message);
         break;
