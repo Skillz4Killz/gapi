@@ -1,5 +1,9 @@
 # gapi / gupi
 
+[![CI](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml/badge.svg)](https://github.com/Skillz4Killz/gapi/actions/workflows/CI.yml)
+![npm](https://img.shields.io/npm/v/gupi)
+[![Guilded](https://img.shields.io/badge/Guilded%20Server-Click%20To%20Join!-yellow)](https://www.guilded.gg/i/Vkb5LVP2)
+
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 ![image](https://img.guildedcdn.com/ContentMedia/cddfebfa0ca84afd72f2a6bdc55bb158-Full.webp?w=713&h=130)
@@ -17,7 +21,7 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - Extremely flexible/dynamic!
 - Keep close to API as possible
 
-## Features 
+## Features
 
 This list is completed features that are currently finished. The full feature list will only be ready when the TODO list is completed.
 
@@ -30,7 +34,11 @@ This list is completed features that are currently finished. The full feature li
 - [x] Clean and powerful events system
   - [x] Event listeners that are ran when an event occurs.
   - [x] Useful events available to help debug!
-  
+- [x] GH Actions
+  - [x] Linter
+  - [x] Prettier
+  - [x] TSC
+
 # Usage
 
 ## Beginner/Basic
@@ -122,11 +130,7 @@ client.connect();
 - Proxy REST support
 - Step by step guide
 - GH Actions
-  - Linter
-  - Prettier
-  - TSC
   - Deploy on release
-- Readme badges
 - Readme image/logo??
 - Event Handlers
   - DMChatChannelCreated
