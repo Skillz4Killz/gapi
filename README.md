@@ -34,6 +34,13 @@ This list is completed features that are currently finished. The full feature li
 - [x] Clean and powerful events system
   - [x] Event listeners that are ran when an event occurs.
   - [x] Useful events available to help debug!
+- [x] Clean and powerful tasks system.
+  - [x] Runs a function at a certain interval. Useful for things like unmute and updating bot lists etc.
+  - [x] Can be used for cache sweeping to keep your cache optimized for exactly what you want.
+- [x] Clean and powerful monitors system.
+  - [x] Runs a function on every message sent. Useful for stuff like auto-moderation or tags.
+  - [ ] Easily ignore bots, users, edits, dms.
+  - [ ] Powerful permission checks.
 - [x] GH Actions
   - [x] Linter
   - [x] Prettier
@@ -113,14 +120,6 @@ client.connect();
   - Clean and powerful inhibitors system
     - Stops a command from running if a requirement fails.
     - Easily add custom inhibitors!
-  - Clean and powerful monitors system.
-    - Runs a function on every message sent. Useful for stuff like auto-moderation or tags.
-    - Easily ignore bots, users, edits, dms.
-    - Powerful permission checks.
-  - Clean and powerful tasks system.
-    - Runs a function at a certain interval. Useful for things like unmute and updating bot lists etc.
-    - Can be used for cache sweeping to keep your cache optimized for exactly what you want.
-    - Botlists code already made for most botlists. Just add your api tokens for each site and magic!
   - Clean and powerful languages system.
     - Built in multi-lingual support.
     - Uses i18next, one of the best localization tools available.
