@@ -1,4 +1,4 @@
-export const embedLimits = {
+export const EMBED_LIMITS = {
   title: 256,
   description: 2048,
   fieldName: 256,
@@ -39,11 +39,11 @@ export class Embed {
     // If the string is bigger then the allowed max shorten it.
     if (data.length > max) data = data.substring(0, max);
     // Check the amount of characters left for this embed
-    const availableCharacters = embedLimits.total - this.currentTotal;
+    const availableCharacters = EMBED_LIMITS.total - this.currentTotal;
     // If it is maxed out already return empty string as nothing can be added anymore
     if (!availableCharacters) return ``;
     // If the string breaks the maximum embed limit then shorten it.
-    if (this.currentTotal + data.length > embedLimits.total) {
+    if (this.currentTotal + data.length > EMBED_LIMITS.total) {
       return data.substring(0, availableCharacters);
     }
     // Return the data as is with no changes.
@@ -51,7 +51,7 @@ export class Embed {
   }
 
   setAuthor(name: string, icon?: string, url?: string) {
-    const finalName = this.enforceLimits ? this.fitData(name, embedLimits.authorName) : name;
+    const finalName = this.enforceLimits ? this.fitData(name, EMBED_LIMITS.authorName) : name;
     // eslint-disable-next-line @typescript-eslint/camelcase
     this.author = { name: finalName, icon_url: icon, url };
 
@@ -71,7 +71,7 @@ export class Embed {
 
   setDescription(description: string | string[]) {
     if (Array.isArray(description)) description = description.join('\n');
-    this.description = this.fitData(description, embedLimits.description);
+    this.description = this.fitData(description, EMBED_LIMITS.description);
 
     return this;
   }
@@ -80,8 +80,8 @@ export class Embed {
     if (this.fields.length >= 25) return this;
 
     this.fields.push({
-      name: this.fitData(name, embedLimits.fieldName),
-      value: this.fitData(value, embedLimits.fieldValue),
+      name: this.fitData(name, EMBED_LIMITS.fieldName),
+      value: this.fitData(value, EMBED_LIMITS.fieldValue),
       inline,
     });
 
@@ -105,7 +105,7 @@ export class Embed {
   setFooter(text: string, icon?: string) {
     // eslint-disable-next-line @typescript-eslint/camelcase
     this.footer = {
-      text: this.fitData(text, embedLimits.footerText),
+      text: this.fitData(text, EMBED_LIMITS.footerText),
       icon_url: icon,
     };
 
@@ -125,7 +125,7 @@ export class Embed {
   }
 
   setTitle(title: string, url?: string) {
-    this.title = this.fitData(title, embedLimits.title);
+    this.title = this.fitData(title, EMBED_LIMITS.title);
     if (url) this.url = url;
 
     return this;
