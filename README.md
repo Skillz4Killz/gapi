@@ -85,16 +85,34 @@ new Client({ email: 'emailhere', password: 'passwordhere' })
   .connect();
 ```
 
-## Advanced
+## BotClient (Full Command Framework)
 
 ```ts
-import { Client, baseStructures, structures } from 'gupi';
+import { BotClient, baseStructures, structures } from 'gupi';
+import configs from './configs';
+
+// Start it up!
+const client = new BotClient(configs)
+  .on('ready', () => console.log('Successfully connected to gateway'))
+  .on('messageCreate', message => {
+    if (message.content === '!ping') {
+      // TODO: pending
+    }
+  });
 
 // Override any internal structures without having to fork and maintain headaches.
 baseStructures.Base = class {
+  id = '';
+  client: BotClient;
+
   // Adding custom props
-  newProp: 'success';
+  newProp = 'success';
   // On the opposite side, use this to remove any props you don't want to save RAM/cache!
+
+  constructor(client: BotClient, id: string) {
+    this.id = id;
+    this.client = client;
+  }
 
   // Adding custom getters
   get newGetter() {
@@ -111,15 +129,6 @@ baseStructures.Base = class {
 structures.Message = class extends baseStructures.Base {
   // Same as above. Everything is customizable
 };
-
-// Start it up!
-const client = new Client({ email: 'emailhere', password: 'passwordhere' })
-  .on('ready', () => console.log('Successfully connected to gateway'))
-  .on('messageCreate', message => {
-    if (message.content === '!ping') {
-      // TODO: pending
-    }
-  });
 
 // Cache Control!
 // Set to 0 to disable caching. Apply to any desired Collection.
