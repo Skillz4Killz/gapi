@@ -1,5 +1,4 @@
 import Message from '../../../lib/Message';
-import Team from '../../../lib/Team';
 import { humanizeMilliseconds } from '../../../utils/time';
 import { Command } from '../../Command';
 import Inhibitor from '../../Inhibitor';
