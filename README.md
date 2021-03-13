@@ -23,8 +23,6 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 ## Features
 
-This list is completed features that are currently finished. The full feature list will only be ready when the TODO list is completed.
-
 - [x] Initial Connection
   - [x] Handle closes/Reconnection
 - [x] Custom structures support
@@ -41,11 +39,32 @@ This list is completed features that are currently finished. The full feature li
   - [x] Runs a function on every message sent. Useful for stuff like auto-moderation or tags.
   - [ ] Easily ignore bots, users, edits, dms.
   - [ ] Powerful permission checks.
+- [x] Clean and powerful inhibitors system
+  - [x] Stops a command from running if a requirement fails.
+  - [x] Easily add custom inhibitors!
+- [ ] Clean and powerful commands system
+  - [ ] Powerful argument handling including validating, parsing and modifications.
+  - [ ] Easily create custom arguments for your specific needs.
+  - [ ] Command aliases.
+  - [ ] Cooldowns and allowed uses before cooldown triggers.
+  - [ ] Author and bot permission checks in server AND in channel!
+- [ ] Clean and powerful languages system.
+  - [ ] Built in multi-lingual support.
+  - [ ] Uses i18next, one of the best localization tools available.
+  - [ ] Supports nested folders to keep cleaner translation files
 - [x] GH Actions
   - [x] Linter
   - [x] Prettier
   - [x] TSC
 - [x] Event Handlers
+- [ ] 100% API coverage
+- [ ] Custom(Redis) cache support
+- [ ] Proxy WS support
+- [ ] Proxy REST support
+- [ ] Step by step guide
+- [ ] GH Actions
+  - [ ] Deploy on release
+- [ ] Readme image/logo??
 
 # Usage
 
@@ -107,28 +126,3 @@ client.users.maxSize = 1000;
 
 client.connect();
 ```
-
-# To Do List
-
-- Framework
-  - Clean and powerful commands system
-    - Powerful argument handling including validating, parsing and modifications.
-    - Easily create custom arguments for your specific needs.
-    - Command aliases.
-    - Cooldowns and allowed uses before cooldown triggers.
-    - Author and bot permission checks in server AND in channel!
-  - Clean and powerful inhibitors system
-    - Stops a command from running if a requirement fails.
-    - Easily add custom inhibitors!
-  - Clean and powerful languages system.
-    - Built in multi-lingual support.
-    - Uses i18next, one of the best localization tools available.
-    - Supports nested folders to keep cleaner translation files
-- 100% API coverage
-- Custom(Redis) cache support
-- Proxy WS support
-- Proxy REST support
-- Step by step guide
-- GH Actions
-  - Deploy on release
-- Readme image/logo??
