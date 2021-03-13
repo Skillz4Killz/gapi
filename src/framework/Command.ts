@@ -7,7 +7,7 @@ export class Command {
   /** The client itself */
   client: BotClient;
   /** The name of the command. */
-  name = "";
+  name = '';
   /** The aliases for this command. */
   aliases: string[] = [];
   /** The description of the command. Can also be a function in case it needs to be translated or such. */
@@ -67,8 +67,8 @@ export interface CommandArgument {
   name: string;
   /** The type of the argument you would like. Defaults to string. */
   type:
-    | 'number'
     | 'string'
+    | 'number'
     | '...string'
     | 'boolean'
     | 'subcommand'

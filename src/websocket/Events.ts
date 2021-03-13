@@ -83,6 +83,342 @@ export default class GuildedEvents {
   TEAM_CHANNEL_ARCHIVED(payload: any, id: string) {
     this.client.emit('teamChannelArchived', payload, id);
   }
+
+  DMChatChannelCreated(payload: any, id: string) {
+    this.client.emit('dmChatChannelCreated', payload, id);
+  }
+  ChatChannelBroadcastCall(payload: any, id: string) {
+    this.client.emit('chatChannelBroadcastCall', payload, id);
+  }
+  ChatChannelBroadcastCallResponse(payload: any, id: string) {
+    this.client.emit('chatChannelBroadcastCallResponse', payload, id);
+  }
+
+  ChatChannelHidden(payload: any, id: string) {
+    this.client.emit('chatChannelHidden', payload, id);
+  }
+  ChatChannelNicknameChanged(payload: any, id: string) {
+    this.client.emit('chatChannelNicknameChanged', payload, id);
+  }
+
+  ChatMessagesDeleted(payload: any, id: string) {
+    this.client.emit('chatMessagesDeleted', payload, id);
+  }
+
+  ChatPinnedMessageCreated(payload: any, id: string) {
+    this.client.emit('chatPinnedMessageCreated', payload, id);
+  }
+  ChatPinnedMessageDeleted(payload: any, id: string) {
+    this.client.emit('chatPinnedMessageDeleted', payload, id);
+  }
+
+  TEAEM_SOCKET_RECONNECTED(payload: any, id: string) {
+    this.client.emit('teamSockedReconnected', payload, id);
+  }
+  teamRolesUpdated(payload: any, id: string) {
+    this.client.emit('teamRolesUpdated', payload, id);
+  }
+  TeamXpAdded(payload: any, id: string) {
+    this.client.emit('teamXpAdded', payload, id);
+  }
+  TeamXpSet(payload: any, id: string) {
+    this.client.emit('teamXpSet', payload, id);
+  }
+  teamReactionsUpdated(payload: any, id: string) {
+    this.client.emit('teamReactionsUpdated', payload, id);
+  }
+  teamContentReactionsAdded(payload: any, id: string) {
+    this.client.emit('teamContentReactionsAdded', payload, id);
+  }
+  teamContentReactionsRemoved(payload: any, id: string) {
+    this.client.emit('teamContentReactionsRemoved', payload, id);
+  }
+  TeamContentDeleted(payload: any, id: string) {
+    this.client.emit('teamContentDeleted', payload, id);
+  }
+  TeamMessagesDeleted(payload: any, id: string) {
+    this.client.emit('teamMessagesDeleted', payload, id);
+  }
+  teamThreadCreated(payload: any, id: string) {
+    this.client.emit('teamThreadCreated', payload, id);
+  }
+  teamThreadReplyCreated(payload: any, id: string) {
+    this.client.emit('teamThreadReplyCreated', payload, id);
+  }
+  TeamEventModified(payload: any, id: string) {
+    this.client.emit('teamEventModified', payload, id);
+  }
+  TeamEventCreated(payload: any, id: string) {
+    this.client.emit('teamEventCreated', payload, id);
+  }
+  TeamEventRemoved(payload: any, id: string) {
+    this.client.emit('teamEventRemoved', payload, id);
+  }
+  TeamMemberJoined(payload: any, id: string) {
+    this.client.emit('teamMemberJoined', payload, id);
+  }
+  TeamMemberRemoved(payload: any, id: string) {
+    this.client.emit('teamMemberRemoved', payload, id);
+  }
+  TeamMembersRemoved(payload: any, id: string) {
+    this.client.emit('teamMembersRemoved', payload, id);
+  }
+  TeamMutedMembersUpdated(payload: any, id: string) {
+    this.client.emit('teamMutedMembersUpdated', payload, id);
+  }
+  TeamDeafenedMembersUpdated(payload: any, id: string) {
+    this.client.emit('teamDeafenedMembersUpdated', payload, id);
+  }
+  TeamMemberAliasUpdated(payload: any, id: string) {
+    this.client.emit('teamMemberAliasUpdated', payload, id);
+  }
+  TeamSubscriptionInfoUpdated(payload: any, id: string) {
+    this.client.emit('teamSubscriptionInfoUpdated', payload, id);
+  }
+  TeamStreamInfoUpdated(payload: any, id: string) {
+    this.client.emit('teamStreamInfoUpdated', payload, id);
+  }
+  TeamContentOperationsApplied(payload: any, id: string) {
+    this.client.emit('teamContentOperationsApplied', payload, id);
+  }
+  TeamContentReplaced(payload: any, id: string) {
+    this.client.emit('teamContentReplaced', payload, id);
+  }
+  TeamContentReplyAdded(payload: any, id: string) {
+    this.client.emit('teamContentReplyAdded', payload, id);
+  }
+  TeamContentReplyRemoved(payload: any, id: string) {
+    this.client.emit('teamContentReplyRemoved', payload, id);
+  }
+  TeamAvailabilitiesUpdated(payload: any, id: string) {
+    this.client.emit('teamAvailabilitiesUpdated', payload, id);
+  }
+  TeamChannelAvailabilitiesUpdated(payload: any, id: string) {
+    this.client.emit('teamChannelAvailabilitiesUpdated', payload, id);
+  }
+  TeamChannelAvailabilitiesRemoved(payload: any, id: string) {
+    this.client.emit('teamChannelAvailabilitiesRemoved', payload, id);
+  }
+  TeamMemberUpdated(payload: any, id: string) {
+    this.client.emit('teamMemberUpdated', payload, id);
+  }
+  TeamMemberSocialLinkUpdated(payload: any, id: string) {
+    this.client.emit('teamMemberSocialLinkUpdated', payload, id);
+  }
+  TeamGameAdded(payload: any, id: string) {
+    this.client.emit('teamGameAdded', payload, id);
+  }
+  TeamApplicationCreated(payload: any, id: string) {
+    this.client.emit('teamApplicationCreated', payload, id);
+  }
+  TeamApplicationRemoved(payload: any, id: string) {
+    this.client.emit('teamApplicationRemoved', payload, id);
+  }
+  TeamApplicationUpdated(payload: any, id: string) {
+    this.client.emit('teamApplicationUpdated', payload, id);
+  }
+  TeamUpdated(payload: any, id: string) {
+    this.client.emit('teamUpdated', payload, id);
+  }
+  TeamChannelCreated(payload: any, id: string) {
+    this.client.emit('teamChannelCreated', payload, id);
+  }
+  TeamChannelUpdated(payload: any, id: string) {
+    this.client.emit('teamChannelUpdated', payload, id);
+  }
+  TeamChannelPrioritiesUpdated(payload: any, id: string) {
+    this.client.emit('teamChannelPrioritiesUpdated', payload, id);
+  }
+  TeamChannelCategoryPrioritiesUpdated(payload: any, id: string) {
+    this.client.emit('teamChannelCategoryPrioritiesUpdated', payload, id);
+  }
+  TeamChannelDeleted(payload: any, id: string) {
+    this.client.emit('teamChannelDeleted', payload, id);
+  }
+  TeamChannelsDeleted(payload: any, id: string) {
+    this.client.emit('teamChannelsDeleted', payload, id);
+  }
+  TeamChannelCategoryCreated(payload: any, id: string) {
+    this.client.emit('teamChannelCategoryCreated', payload, id);
+  }
+  TeamChannelCategoryUpdated(payload: any, id: string) {
+    this.client.emit('teamChannelCategoryUpdated', payload, id);
+  }
+  TeamChannelCategoryDeleted(payload: any, id: string) {
+    this.client.emit('teamChannelCategoryDeleted', payload, id);
+  }
+  TeamChannelCategoriesDeleted(payload: any, id: string) {
+    this.client.emit('teamChannelCategoriesDeleted', payload, id);
+  }
+  TeamChannelCategoryGroupMoved(payload: any, id: string) {
+    this.client.emit('teamChannelCategoryGroupMoved', payload, id);
+  }
+  TeamWebhookCreated(payload: any, id: string) {
+    this.client.emit('teamWebhookCreated', payload, id);
+  }
+  TeamWebhookUpdated(payload: any, id: string) {
+    this.client.emit('teamWebhookUpdated', payload, id);
+  }
+  TeamBotCreated(payload: any, id: string) {
+    this.client.emit('teamBotCreated', payload, id);
+  }
+  TeamBotUpdated(payload: any, id: string) {
+    this.client.emit('teamBotUpdated', payload, id);
+  }
+  TeamBotFlowUpdated(payload: any, id: string) {
+    this.client.emit('teamBotFlowUpdated', payload, id);
+  }
+  TeamGroupPrioritiesUpdated(payload: any, id: string) {
+    this.client.emit('teamGroupPrioritiesUpdated', payload, id);
+  }
+  TeamGroupDeleted(payload: any, id: string) {
+    this.client.emit('teamGroupDeleted', payload, id);
+  }
+  TeamGroupArchived(payload: any, id: string) {
+    this.client.emit('teamGroupArchived', payload, id);
+  }
+  TeamGroupRestored(payload: any, id: string) {
+    this.client.emit('teamGroupRestored', payload, id);
+  }
+  TeamGroupFollowed(payload: any, id: string) {
+    this.client.emit('teamGroupFollowed', payload, id);
+  }
+  TeamStripeAccountOnboarded(payload: any, id: string) {
+    this.client.emit('teamStripeAccountOnboarded', payload, id);
+  }
+  TeamServerSubscriptionPlanCreated(payload: any, id: string) {
+    this.client.emit('teamServerSubscriptionPlanCreated', payload, id);
+  }
+  TeamServerSubscriptionPlanUpdated(payload: any, id: string) {
+    this.client.emit('teamServerSubscriptionPlanUpdated', payload, id);
+  }
+  TeamServerSubscriptionPlanDeleted(payload: any, id: string) {
+    this.client.emit('teamServerSubscriptionPlanDeleted', payload, id);
+  }
+  TeamServerSubscriptionUpdated(payload: any, id: string) {
+    this.client.emit('teamServerSubscriptionUpdated', payload, id);
+  }
+  USER_SOCKET_CONNECTED(payload: any, id: string) {
+    this.client.emit('uSER_SOCKET_CONNECTED', payload, id);
+  }
+  USER_SOCKET_CONNECT_ERROR(payload: any, id: string) {
+    this.client.emit('uSER_SOCKET_CONNECT_ERROR', payload, id);
+  }
+  USER_SOCKET_RECONNECTED(payload: any, id: string) {
+    this.client.emit('userSocketReconnected', payload, id);
+  }
+  USER_SOCKET_RECONNECTING(payload: any, id: string) {
+    this.client.emit('userSocketReconnecting', payload, id);
+  }
+  USER_ALIAS_UPDATED(payload: any, id: string) {
+    this.client.emit('userAliasUpdated', payload, id);
+  }
+  USER_TEAM_MEMBER_STREAM_UPDATED(payload: any, id: string) {
+    this.client.emit('userTeamMemberStreamUpdated', payload, id);
+  }
+  USER_PRESENCE_MANUALLY_SET(payload: any, id: string) {
+    this.client.emit('userPresenceManuallySet', payload, id);
+  }
+  USER_PRESENCE_RECEIVED(payload: any, id: string) {
+    this.client.emit('userPresenceReceived', payload, id);
+  }
+
+  USER_UPDATED(payload: any, id: string) {
+    this.client.emit('userUpdated', payload, id);
+  }
+  USER_TEAMS_UPDATED(payload: any, id: string) {
+    this.client.emit('userTeamsUpdated', payload, id);
+  }
+  USER_SOCIAL_LINK_UPDATED(payload: any, id: string) {
+    this.client.emit('userSocialLinkUpdated', payload, id);
+  }
+  USER_TEAM_SECTION_UNREAD_COUNT_INCREMENTED(payload: any, id: string) {
+    this.client.emit('userTeamSectionUnreadCountIncremented', payload, id);
+  }
+  USER_SCANNED_MOBILE_DOWNLOAD_QR(payload: any, id: string) {
+    this.client.emit('userScannedMobileDownloadQR', payload, id);
+  }
+
+  TEAM_CHANNEL_CONTENT_CREATED_SILENT(payload: any, id: string) {
+    this.client.emit('teamChannelContentCreatedSilent', payload, id);
+  }
+  TEAM_CHANNEL_CONTENT_REPLY_CREATED(payload: any, id: string) {
+    this.client.emit('teamChannelContentReplyCreated', payload, id);
+  }
+  TEAM_CHANNEL_CONTENT_REPLY_UPDATED(payload: any, id: string) {
+    this.client.emit('teamChannelContentReplyUpdated', payload, id);
+  }
+  TEAM_CHANNEL_CONTENT_REPLY_DELETED(payload: any, id: string) {
+    this.client.emit('teamChannelContentReplyDeleted', payload, id);
+  }
+  TEAM_CHANNEL_CONTENT_UPDATED(payload: any, id: string) {
+    this.client.emit('teamChannelContentUpdated', payload, id);
+  }
+  TEAM_CHANNEL_CONTENT_DELETED(payload: any, id: string) {
+    this.client.emit('teamChannelContentDeleted', payload, id);
+  }
+
+  TEAM_CHANNEL_RESTORED(payload: any, id: string) {
+    this.client.emit('teamChannelRestored', payload, id);
+  }
+  TeamChannelVoiceParticipantAdded(payload: any, id: string) {
+    this.client.emit('teamChannelVoiceParticipantAdded', payload, id);
+  }
+  TeamChannelVoiceParticipantRemoved(payload: any, id: string) {
+    this.client.emit('teamChannelVoiceParticipantRemoved', payload, id);
+  }
+  TeamChannelVoiceUserClientConnected(payload: any, id: string) {
+    this.client.emit('teamChannelVoiceUserClientConnected', payload, id);
+  }
+  TeamChannelStreamUserClientConnected(payload: any, id: string) {
+    this.client.emit('teamChannelStreamUserClientConnected', payload, id);
+  }
+  TeamChannelStreamAdded(payload: any, id: string) {
+    this.client.emit('teamChannelStreamAdded', payload, id);
+  }
+  TeamChannelStreamRemoved(payload: any, id: string) {
+    this.client.emit('teamChannelStreamRemoved', payload, id);
+  }
+  TeamChannelStreamActive(payload: any, id: string) {
+    this.client.emit('teamChannelStreamActive', payload, id);
+  }
+  TeamChannelStreamEnded(payload: any, id: string) {
+    this.client.emit('teamChannelStreamEnded', payload, id);
+  }
+  TeamChannelVoiceUserMoved(payload: any, id: string) {
+    this.client.emit('teamChannelVoiceUserMoved', payload, id);
+  }
+
+  CHANNEL_CONTENT_SEEN(payload: any, id: string) {
+    this.client.emit('channelContentSeen', payload, id);
+  }
+  CHANNEL_BADGED(payload: any, id: string) {
+    this.client.emit('channelBadged', payload, id);
+  }
+  CHANNEL_UNBADGED(payload: any, id: string) {
+    this.client.emit('channelUnbadged', payload, id);
+  }
+  TEAM_GROUP_CREATED(payload: any, id: string) {
+    this.client.emit('teamGroupCreated', payload, id);
+  }
+  TEAM_GROUP_UPDATED(payload: any, id: string) {
+    this.client.emit('teamGroupUpdated', payload, id);
+  }
+  TEAM_GROUP_DELETED_FOR_USER(payload: any, id: string) {
+    this.client.emit('teamGroupDeletedForUser', payload, id);
+  }
+  TEAM_USER_GROUP_PRIORITIES_UPDATED(payload: any, id: string) {
+    this.client.emit('teamUserGroupPrioritiesUpdated', payload, id);
+  }
+  TEAM_GROUP_MARKED_AS_READ(payload: any, id: string) {
+    this.client.emit('teamGroupMarkedAsRead', payload, id);
+  }
+  USER_MEDIA_UPLOAD_PROGRESS(payload: any, id: string) {
+    this.client.emit('userMediaUploadProgress', payload, id);
+  }
+  VoiceChannelRegionPingReport(payload: any, id: string) {
+    this.client.emit('voiceChannelRegionPingReport', payload, id);
+  }
 }
 
 export type GuildedEventNames =
@@ -209,4 +545,4 @@ export type GuildedEventNames =
   | 'TEAM_GROUP_MARKED_AS_READ'
   | 'USER_MEDIA_UPLOAD_PROGRESS'
   | 'VoiceChannelRegionPingReport'
-  | "StageUpdated";
+  | 'StageUpdated';

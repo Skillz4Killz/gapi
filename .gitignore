@@ -1,6 +1,7 @@
 # Custom
 ## Allow testing the lib
 test.ts
+tests/
 
 # Logs
 logs
