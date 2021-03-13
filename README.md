@@ -45,8 +45,8 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - [ ] Clean and powerful commands system
   - [ ] Powerful argument handling including validating, parsing and modifications.
   - [ ] Easily create custom arguments for your specific needs.
-  - [ ] Command aliases.
-  - [ ] Cooldowns and allowed uses before cooldown triggers.
+  - [x] Command aliases.
+  - [x] Cooldowns and allowed uses before cooldown triggers.
   - [ ] Author and bot permission checks in server AND in channel!
 - [ ] Clean and powerful languages system.
   - [ ] Built in multi-lingual support.
