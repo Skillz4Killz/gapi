@@ -54,6 +54,7 @@ export default class BotClient extends Client {
           const name = filename.substring(0, filename.length - 2);
           const piece = file.default ? new file.default(this, name) : new file(this, name);
           collection.set(piece.name || name, piece);
+          if (piece.init) await piece.init();
         }
       }),
     );
