@@ -98,8 +98,15 @@ const client = new BotClient(configs)
     if (message.content === '!ping') {
       // TODO: pending
     }
-  });
+  })
+  .connect();
+```
 
+## Advanced Customizations
+
+Everything below this is to showcase examples of advanced features! They are intentionally written in a way that is confusing to a beginner developer, as it is not meant for you. This is an extreme edge case scenario for bots that scale really big!
+
+```ts
 // Override any internal structures without having to fork and maintain headaches.
 baseStructures.Base = class {
   id = '';
