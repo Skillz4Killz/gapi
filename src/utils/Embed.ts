@@ -1,3 +1,5 @@
+import User from '../lib/User';
+
 export const EMBED_LIMITS = {
   title: 256,
   description: 2048,
@@ -50,7 +52,20 @@ export class Embed {
     return data;
   }
 
-  setAuthor(name: string, icon?: string, url?: string) {
+  setAuthor(name: string | User, icon?: string, url?: string) {
+    // IF A USER WAS PASSED IN
+    if (name instanceof User) {
+      // IF ICON WAS PROVIDED CHANGE IT TO URL
+      if (icon) {
+        url = icon;
+        icon = undefined;
+      }
+      // FIRST SET THE AVATAR URL IF ONE IS NOT PROVIDED
+      if (!icon) icon = name.avatarURL;
+      // OVERWRITE THE NAME WITH THE USER
+      name = name.name;
+    }
+
     const finalName = this.enforceLimits ? this.fitData(name, EMBED_LIMITS.authorName) : name;
     // eslint-disable-next-line @typescript-eslint/camelcase
     this.author = { name: finalName, icon_url: icon, url };
