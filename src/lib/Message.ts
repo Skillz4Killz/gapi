@@ -126,10 +126,17 @@ export default class Message extends Base {
                 },
               ],
             },
+            {
+              object: 'block',
+              type: 'webhookMessage',
+              data: {
+                embeds: embed ? [embed.toJSON()] : [],
+              },
+              nodes: [],
+            },
           ],
         },
       },
-      embed,
     });
   }
 }
