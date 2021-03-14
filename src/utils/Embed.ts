@@ -151,6 +151,21 @@ export class Embed {
 
     return this;
   }
+
+  toJSON() {
+    return {
+      color: this.color,
+      fields: this.fields,
+      author: this.author,
+      description: this.description,
+      footer: this.footer,
+      image: this.image,
+      timestamp: this.timestamp,
+      title: this.title,
+      thumbnail: this.thumbnail,
+      url: this.url,
+    };
+  }
 }
 
 export interface EmbedFile {
