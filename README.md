@@ -90,9 +90,7 @@ import { BotClient, baseStructures, structures } from 'gupi';
 import configs from './configs';
 
 // Start it up!
-const client = new BotClient(configs)
-  .on('ready', () => console.log('Successfully connected to gateway'))
-  .connect();
+const client = new BotClient(configs).on('ready', () => console.log('Successfully connected to gateway')).connect();
 
 // src/commands/avatar.ts
 import { Command, CommandArgument } from '../../src/framework/Command';
