@@ -12,8 +12,6 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 > The name is gapi but silly google took that name so on npm we use gupi
 
-## This lib is not being built to be used! It is an experiment for me to learn and grow as a developer.
-
 # Design Goals
 
 - Best Scalability!
