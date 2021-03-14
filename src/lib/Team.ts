@@ -25,7 +25,7 @@ export default class Team extends Base {
 
   /** The url for this teams banner using the default image height and width sizes provided. */
   get avatarURL() {
-    return `https://img.guildedcdn.com/TeamAvatar/${this.hash}-Small.png`;
+    return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/TeamAvatar/${this.hash}-Small.png?w=${this.client.imageDefaultWidth}&h=${this.client.imageDefaultHeight}`;
   }
 
   /** The url for this teams banner using the provided width and height */
@@ -36,8 +36,6 @@ export default class Team extends Base {
       type?: 'Small' | 'Medium' | 'Large';
     } = { type: 'Medium' },
   ) {
-    if (options.type) return `https://img.guildedcdn.com/TeamAvatar/${this.hash}-${options.type}.png`;
-
     return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/TeamAvatar/${this.hash}-${
       options.type || 'Medium'
     }.png?w=${options.width || this.client.imageDefaultWidth}&h=${options.height || this.client.imageDefaultHeight}`;
