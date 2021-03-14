@@ -61,12 +61,11 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 - [x] Event Handlers
 - [ ] 100% API coverage
 - [ ] Custom(Redis) cache support
-- [ ] Proxy WS support
-- [ ] Proxy REST support
 - [ ] Step by step guide
-- [ ] GH Actions
-  - [ ] Deploy on release
+- [ ] GH Actions: Deploy on release
 - [ ] Readme image/logo??
+- [ ] Proxy WS support (Pending until sharding is implemented in Guilded)
+- [ ] Proxy REST support (Pending until Rate Limits are better implemented in Guilded)
 
 # Usage
 
