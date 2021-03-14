@@ -107,36 +107,6 @@ const client = new BotClient(configs)
 Everything below this is to showcase examples of advanced features! They are intentionally written in a way that is confusing to a beginner developer, as it is not meant for you. This is an extreme edge case scenario for bots that scale really big!
 
 ```ts
-// Override any internal structures without having to fork and maintain headaches.
-baseStructures.Base = class {
-  id = '';
-  client: BotClient;
-
-  // Adding custom props
-  newProp = 'success';
-  // On the opposite side, use this to remove any props you don't want to save RAM/cache!
-
-  constructor(client: BotClient, id: string) {
-    this.id = id;
-    this.client = client;
-  }
-
-  // Adding custom getters
-  get newGetter() {
-    return true;
-  }
-
-  // Add custom methods
-  newMethod() {
-    return true;
-  }
-};
-
-// Most commonly used structures
-structures.Message = class extends baseStructures.Base {
-  // Same as above. Everything is customizable
-};
-
 // Cache Control!
 // Set to 0 to disable caching. Apply to any desired Collection.
 client.users.maxSize = 1000;
