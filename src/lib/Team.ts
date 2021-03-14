@@ -1,20 +1,26 @@
-import { baseStructures } from '../base';
 import Client from '../Client';
+import Collection from '../utils/Collection';
+import Base from './Base';
+import User from './User';
 
-export default class Team extends baseStructures.Base {
+export default class Team extends Base {
   /** The unique hash for this teams banner. */
   hash = '';
   /** The name of the team */
   name!: string;
+  /** The language that this team uses. */
+  locale: string;
 
-  // TODO: fill these
-  members = new baseStructures.Collection(this.client);
-  groups = new baseStructures.Collection(this.client);
+  members = new Collection(this.client);
+  groups = new Collection(this.client);
 
   constructor(client: Client, payload: GuildedTeam) {
     super(client, payload.id);
 
+    this.locale = 'en_US';
     this.update(payload);
+
+    this.fetchMembers();
   }
 
   /** The url for this teams banner using the default image height and width sizes provided. */
@@ -45,10 +51,21 @@ export default class Team extends baseStructures.Base {
         continue;
       }
 
+      // We want collections so skip these
+      if (['members', 'groups'].includes(key)) {
+        for (const member of value) {
+          // this.members.set(member.id, new User(client, member));
+          this.client.users.set(member.id, new User(this.client, member));
+        }
+        continue;
+      }
+
       // TODO: FIX THIS
       // @ts-ignore
       this[key as keyof GuildedTeam] = value;
     }
+
+    return this;
   }
 
   /** Edit a members nickname in this team */
@@ -59,6 +76,12 @@ export default class Team extends baseStructures.Base {
   /** Fetch the channels for this team */
   fetchChannels(force = false, cache = true) {
     return this.client.requestManager.fetchChannels(this.id, force, cache);
+  }
+
+  async fetchMembers() {
+    // WILL CACHE THE MEMBERS
+    await this.client.requestManager.fetchTeam(this.id);
+    return this.members;
   }
 
   /** Fetch the groups for this team */
