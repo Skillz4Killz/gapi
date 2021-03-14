@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.guilded.gg';
+export const BASE_URL = 'https://www.guilded.gg/api';
 
 export const ENDPOINTS = {
   /** Gets the value of the client. */
