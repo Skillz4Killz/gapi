@@ -1,10 +1,10 @@
-import { baseStructures } from '../base';
 import Client from '../Client';
 import Collection from '../utils/Collection';
+import Base from './Base';
 import ChannelMessages from './ChannelMessages';
 import Message from './Message';
 
-export default class Channel extends baseStructures.Base {
+export default class Channel extends Base {
   /** The channel id where this channel is */
   id: string;
   /** The team id where this channel is */

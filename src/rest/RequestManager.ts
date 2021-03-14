@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import Client from '../Client';
-import { GuildedTeam } from '../lib/Team';
-import { structures } from '../structures';
+import Team, { GuildedTeam } from '../lib/Team';
+import User from '../lib/User';
 import { ENDPOINTS } from './endpoints';
 
 export default class RequestManager {
@@ -98,7 +98,7 @@ export default class RequestManager {
   /** Fetches a team. */
   async fetchTeam(id: string) {
     const team = await this.get(ENDPOINTS.team(id));
-    return this.client.teams.set(id, new structures.Team(this.client, team)).get(id);
+    return this.client.teams.set(id, new Team(this.client, team)).get(id);
   }
 
   async fetchCustomReactions(id: string, _force = false, _cache = true) {
@@ -150,7 +150,7 @@ export default class RequestManager {
   /** Fetches a user. */
   async fetchUser(id: string) {
     const user = await this.get(ENDPOINTS.user(id));
-    return this.client.users.set(id, new structures.User(this.client, user)).get(id);
+    return this.client.users.set(id, new User(this.client, user)).get(id);
   }
 
   // CHANNEL RELATED METHODS

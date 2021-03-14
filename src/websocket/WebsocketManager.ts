@@ -1,9 +1,9 @@
-import { baseStructures } from '../base';
 import Client from '../Client';
 import { BASE_URL } from '../rest/endpoints';
+import Collection from '../utils/Collection';
 import Shard from './Shard';
 
-export default class WebsocketManager extends baseStructures.Collection<string, Shard> {
+export default class WebsocketManager extends Collection<string, Shard> {
   /** The client itself */
   client: Client;
   /** The base websocket url */

@@ -1,7 +1,7 @@
-import { baseStructures } from '../base';
+import Collection from '../utils/Collection';
 import Message from './Message';
 
-export default class ChannelMessages extends baseStructures.Collection<string, Message> {
+export default class ChannelMessages extends Collection<string, Message> {
   /** Delete multiple messages */
   async bulkDelete(messageIds: string[]) {
     // TODO: figure out how to bulk delete
