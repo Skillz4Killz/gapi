@@ -75,7 +75,7 @@ new Client({ email: 'emailhere', password: 'passwordhere' })
   .on('ready', () => console.log('Successfully connected to gateway'))
   .on('messageCreate', message => {
     if (message.content === '!ping') {
-      // TODO: pending
+      message.send(`Ping MS: ${Date.now() - message.timestamp}ms`);
     }
   })
   .on('unknown', console.log)
