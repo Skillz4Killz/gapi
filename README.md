@@ -25,9 +25,10 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 - [x] Initial Connection
   - [x] Handle closes/Reconnection
-- [x] Custom structures support
+- [x] Advanced RAM control!
   - [x] Add custom props
   - [x] Remove undesired props to save RAM
+  - [x] Limit the max amount of items in a collection.
 - [x] Basic Cache control
 - [x] Clean and powerful events system
   - [x] Event listeners that are ran when an event occurs.
@@ -47,12 +48,12 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
   - [x] Easily create custom arguments for your specific needs.
   - [x] Command aliases.
   - [x] Cooldowns and allowed uses before cooldown triggers.
-  - [ ] Argument prompting!
+  - [x] Argument prompting!
   - [ ] Author and bot permission checks in server AND in channel!
-- [ ] Clean and powerful languages system.
-  - [ ] Built in multi-lingual support.
-  - [ ] Uses i18next, one of the best localization tools available.
-  - [ ] Supports nested folders to keep cleaner translation files
+- [x] Clean and powerful languages system.
+  - [x] Built in multi-lingual support.
+  - [x] Uses i18next, one of the best localization tools available.
+  - [x] Supports nested folders to keep cleaner translation files
 - [x] GH Actions
   - [x] Linter
   - [x] Prettier
