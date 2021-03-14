@@ -1,5 +1,7 @@
 import { baseStructures } from '../base';
 import Client from '../Client';
+import { Embed } from '../utils/Embed';
+import Channel from './Channel';
 
 export default class Message extends baseStructures.Base {
   /** The guilded client uuid */
@@ -21,10 +23,14 @@ export default class Message extends baseStructures.Base {
   /** The content id for this message content. */
   contentId: string;
   /** The content/text for this message. */
-  content = '';
+  content: string;
 
   constructor(client: Client, payload: MessagePayload) {
     super(client, payload.message.id);
+
+    if (!this.client.channels.has(payload.channelId))
+      this.client.channels.set(payload.channelId, new Channel(client, payload));
+    // if (!this.client.users.has(payload.createdBy)) this.client.users.set(payload.createdBy, new User(client, payload.message))
 
     this.guildedClientId = payload.guildedClientId;
     this.channelId = payload.channelId;
@@ -36,6 +42,21 @@ export default class Message extends baseStructures.Base {
     this.timestamp = Date.parse(payload.createdAt);
     this.contentId = payload.contentId;
     this.content = payload.message.content.document.nodes[0]?.nodes[0]?.leaves[0]?.text || '';
+  }
+
+  /** The author of this message. */
+  get author() {
+    return this.client.users.get(this.authorId)!;
+  }
+
+  /** The team where this message was sent */
+  get team() {
+    return this.client.teams.get(this.teamId);
+  }
+
+  /** The channel where this message was sent */
+  get channel() {
+    return this.client.channels.get(this.channelId)!;
   }
 
   /** The Date object for when this message was created. */
@@ -68,29 +89,47 @@ export default class Message extends baseStructures.Base {
     return this.client.requestManager.deleteMessage(this.channelId, this.id);
   }
 
+  /** Translate some text for this messages team */
+  translate(key: string, options?: Record<string, any>, returnArray = false) {
+    // @ts-ignore
+    return this.client.translate(this.teamId, key, options, returnArray);
+  }
+
   /** Send a message to the channel where this message was sent */
-  send(content: string) {
+  send(content: string | Embed, embed?: Embed) {
+    if (typeof content !== 'string') {
+      embed = content;
+      content = '';
+    }
+
     return this.client.requestManager.sendMessage(this.channelId, {
-        confirmed: false,
-        messageId: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
-        }),
-        content: { object: 'value', document: {
+      confirmed: false,
+      messageId: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0,
+          v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }),
+      content: {
+        object: 'value',
+        document: {
           object: 'document',
           data: {},
           nodes: [
             {
-              object: 'block', type: 'paragraph', data: {}, nodes: [{
-                object: 'text',
-                leaves: [
-                  { object: 'leaf', text: content, marks: [] }
-                ]
-              }]
-            }
-          ]
+              object: 'block',
+              type: 'paragraph',
+              data: {},
+              nodes: [
+                {
+                  object: 'text',
+                  leaves: [{ object: 'leaf', text: content, marks: [] }],
+                },
+              ],
+            },
+          ],
         },
       },
+      embed,
     });
   }
 }
