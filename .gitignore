@@ -2,6 +2,7 @@
 ## Allow testing the lib
 test.ts
 tests/
+languages/
 
 # Logs
 logs
