@@ -109,7 +109,7 @@ export default class extends Command {
     // BY DEFAULT WE USE THE USERS OWN URL
     let url = message.author.dynamicAvatarURL({ type: 'Large' });
     // IF THE USER WANTED THE SERVER AVATAR USE IT
-    if (args.server && message.team) url = message.team.avatarURL;
+    if (args.server && message.team) url = message.team.dynamicAvatarURL({ type: 'Large' });
     // IF A USER WAS REQUESTED, THEN WE USE THAT
     if (args.user) url = args.user.dynamicAvatarURL({ type: 'Large' });
 
