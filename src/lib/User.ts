@@ -167,6 +167,6 @@ export type SocialLinkSources =
   | 'youtube';
 
 export interface UserAboutInfo {
-    bio?: string;
-    tagLine?: string;
+  bio?: string;
+  tagLine?: string;
 }

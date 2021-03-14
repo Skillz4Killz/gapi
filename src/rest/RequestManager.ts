@@ -207,12 +207,14 @@ export default class RequestManager {
 
   /** Edit the clients banner */
   editClientBanner(url: string) {
-    return this.post(ENDPOINTS.clientBanner, { imageUrl: url })
+    return this.post(ENDPOINTS.clientBanner, { imageUrl: url });
   }
 
   /** Edit the clients presence */
   editPresence(status: PresenceStatuses | keyof typeof PresenceStatuses) {
-    return this.post(ENDPOINTS.clientPresence, { status: typeof status === "string" ? PresenceStatuses[status] : status })
+    return this.post(ENDPOINTS.clientPresence, {
+      status: typeof status === 'string' ? PresenceStatuses[status] : status,
+    });
   }
 }
 
@@ -220,9 +222,8 @@ export enum PresenceStatuses {
   ONLINE = 1,
   IDLE,
   DO_NOT_DISTURB,
-  INVISIBLE
+  INVISIBLE,
 }
-
 
 // TODO: THIS COULD BE BETTER
 export interface GuildedClientData {
