@@ -86,19 +86,15 @@ new Client({ email: 'emailhere', password: 'passwordhere' })
 ## BotClient (Full Command Framework)
 
 ```ts
-import { BotClient, baseStructures, structures } from 'gupi';
+// index.ts
+import { BotClient } from 'gupi';
 import configs from './configs';
 
 // Start it up!
-const client = new BotClient(configs)
-  .on('ready', () => console.log('Successfully connected to gateway'))
-  .connect();
+const client = new BotClient(configs).on('ready', () => console.log('Successfully connected to gateway')).connect();
 
 // src/commands/avatar.ts
-import { Command, CommandArgument } from '../../src/framework/Command';
-import Message from '../../src/lib/Message';
-import User from '../../src/lib/User';
-import { Embed } from '../../src/utils/Embed';
+import { Command, CommandArgument, Message, User, Embed } from 'gupi';
 
 export default class extends Command {
   name = 'avatar';
