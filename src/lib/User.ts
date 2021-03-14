@@ -47,7 +47,7 @@ export default class User extends Base {
 
   /** The url for this user's avatar using the default image height and width sizes provided. */
   get avatarURL() {
-    return `https://img.guildedcdn.com/UserAvatar/${this.avatarHash}-Small.png`;
+    return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserAvatar/${this.avatarHash}-Small.png`;
   }
 
   /** The url for this user's avatar using the provided width and height */
@@ -60,7 +60,6 @@ export default class User extends Base {
       type: 'Medium',
     },
   ) {
-    if (options.type) return `https://img.guildedcdn.com/UserAvatar/${this.avatarHash}-${options.type}.png`;
     return `https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserAvatar/${this.avatarHash}-${
       options.type || 'Medium'
     }.png?w=${options.width || this.client.imageDefaultWidth}&h=${options.height || this.client.imageDefaultHeight}`;
@@ -101,7 +100,7 @@ export default class User extends Base {
           'profileBannerSm',
         ].includes(key)
       ) {
-        this.avatarHash = value ? value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-')) : undefined;
+        this.avatarHash = value ? value.substring(value.lastIndexOf('/') + 1, value.lastIndexOf('-')) : this.avatarHash;
         continue;
       }
 
@@ -167,6 +166,6 @@ export type SocialLinkSources =
   | 'youtube';
 
 export interface UserAboutInfo {
-    bio?: string;
-    tagLine?: string;
+  bio?: string;
+  tagLine?: string;
 }
