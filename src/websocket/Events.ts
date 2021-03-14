@@ -11,9 +11,7 @@ export default class GuildedEvents {
 
   /** Processes the event and processes it with the appropriate handler. */
   process(id: string, [event, payload]: [GuildedEventNames, Record<string, any>]) {
-    // @ts-ignore
     if (!this[event]) this.client.emit('unknown', event, payload, id);
-    // @ts-ignore
     else this[event](payload, id);
   }
 
