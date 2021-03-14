@@ -62,7 +62,7 @@ export default class extends Monitor {
     const user = bgGreen(black(`${author?.name || 'Unknown'}(${message.authorId})`));
     const guild = bgMagenta(black(`${guildName}${message.teamId ? `(${message.teamId})` : ''}`));
 
-    console.log(`${bgBlue(`[${this.client.getTime()}]`)} => ${command} by ${user} in ${guild}`);
+    console.log(`${bgBlue(`[${this.client.getTime()}]`)} ${command} by ${user} in ${guild}`);
   }
 
   async executeCommand(message: Message, command: Command, parameters: string[], team: Team | undefined) {
@@ -171,7 +171,7 @@ export default class extends Monitor {
         // A REQUIRED ARG WAS MISSING TRY TO COLLECT IT
         const question = await message
           .send(
-            message.translate(message.teamId, 'strings:MISSING_REQUIRED_ARG', {
+            message.translate('strings:MISSING_REQUIRED_ARG', {
               name: argument.name,
               type:
                 argument.type === 'subcommand'
@@ -181,13 +181,13 @@ export default class extends Monitor {
           )
           .catch(console.log);
         if (question) {
-          const response = await message.awaitMessage(message.authorId, message.channelId).catch(console.log);
+          const response = await message.channel.needMessage(message.authorId, message.channelId).catch(console.log);
           if (response) {
             const responseArg = await resolver.execute([response.content], message, command, argument);
             if (responseArg) {
               args[argument.name] = responseArg;
               params.shift();
-              await message.channel.messages.delete([question.id, response.id]).catch(console.log);
+              await message.channel.messages.bulkDelete([question.id, response.id]).catch(console.log);
               continue;
             }
           }
