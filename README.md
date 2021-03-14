@@ -14,10 +14,9 @@ A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
 # Design Goals
 
-- Best Scalability!
-- Best developer experience!
+- Amazing Scalability!
+- Great developer experience!
 - Extremely flexible/dynamic!
-- Keep close to API as possible
 
 ## Features
 
