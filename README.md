@@ -92,12 +92,39 @@ import configs from './configs';
 // Start it up!
 const client = new BotClient(configs)
   .on('ready', () => console.log('Successfully connected to gateway'))
-  .on('messageCreate', message => {
-    if (message.content === '!ping') {
-      // TODO: pending
-    }
-  })
   .connect();
+
+// src/commands/avatar.ts
+import { Command, CommandArgument } from '../../src/framework/Command';
+import Message from '../../src/lib/Message';
+import User from '../../src/lib/User';
+import { Embed } from '../../src/utils/Embed';
+
+export default class extends Command {
+  name = 'avatar';
+  aliases = ['pfp'];
+  description = '🖼️ View the avatar image for a user or the server.';
+  arguments = [
+    { name: 'server', type: 'string', literals: ['server'], required: false },
+    { name: 'user', type: 'user', required: false },
+  ] as CommandArgument[];
+
+  async execute(message: Message, args: { user?: User; server?: 'server' }) {
+    // BY DEFAULT WE USE THE USERS OWN URL
+    let url = message.author.dynamicAvatarURL({ type: 'Large' });
+    // IF THE USER WANTED THE SERVER AVATAR USE IT
+    if (args.server && message.team) url = message.team.avatarURL;
+    // IF A USER WAS REQUESTED, THEN WE USE THAT
+    if (args.user) url = args.user.dynamicAvatarURL({ type: 'Large' });
+
+    return message.send(
+      new Embed()
+        .setAuthor(message.author)
+        .setDescription(`[${message.translate('commands/avatar:DOWNLOAD_LINK')}](${url})`)
+        .setImage(url),
+    );
+  }
+}
 ```
 
 ## Advanced Customizations
