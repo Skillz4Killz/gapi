@@ -1,10 +1,13 @@
+import { readdir } from 'fs/promises';
 import i18next from 'i18next';
+import Backend from 'i18next-fs-backend';
 import path from 'path';
+import configs from '../../tests/configs';
 import Client, { ClientOptions } from '../Client';
 import Message from '../lib/Message';
 import Collection from '../utils/Collection';
 import { bgBlue, bgYellow, black } from '../utils/colorette';
-import { walk } from '../utils/walk';
+import { directoryNames, walk } from '../utils/walk';
 import Argument from './Argument';
 import { Command } from './Command';
 import Event from './Event';
@@ -74,7 +77,6 @@ export default class BotClient extends Client {
         ['monitors', this.monitors] as const,
         ['tasks', this.tasks] as const,
       ].map(async ([dir, collection]) => {
-        console.log(path.join(this.sourceFolderPath, dir));
         for await (const result of walk(path.join(this.sourceFolderPath, dir))) {
           if (!result) return;
 
@@ -93,6 +95,7 @@ export default class BotClient extends Client {
       // TODO: convert payload into message
       this.processReactionCollector(payload);
     });
+    await this.loadLanguages();
   }
 
   /** Handler that is run on messages and can  */
@@ -173,6 +176,69 @@ export default class BotClient extends Client {
 
     if (returnArray) return languageMap(key, { ...options, returnObjects: true }) as string[];
     return languageMap(key, options) as string;
+  }
+
+  async determineNamespaces(dir: string, namespaces: string[] = [], folderName = '') {
+    const folder = await readdir(dir, { withFileTypes: true }).catch(console.log);
+    if (!folder) return [];
+
+    for await (const file of folder) {
+      if (file.isDirectory()) {
+        const isLanguage = file.name.includes('-') || file.name.includes('_');
+
+        namespaces = await this.determineNamespaces(
+          `${dir}/${file.name}`,
+          namespaces,
+          isLanguage ? '' : `${folderName + file.name}/`,
+        );
+      } else {
+        namespaces.push(`${folderName}${file.name.substr(0, file.name.length - 5)}`);
+      }
+    }
+
+    return [...new Set(namespaces)];
+  }
+
+  async loadLanguages() {
+    const languages = path.join(process.cwd(), 'languages');
+    const namespaces = await this.determineNamespaces(languages);
+
+    return i18next.use(Backend).init(
+      {
+        initImmediate: false,
+        fallbackLng: 'en_US',
+        interpolation: { escapeValue: false },
+        load: 'all',
+        lng: 'en_US',
+        saveMissing: true,
+        // Log to discord/console that a string is missing somewhere.
+        missingKeyHandler: (lng, ns, key, fallbackValue) => {
+          const response = `Missing translation key: ${lng}/${ns}/${key}. Instead using: ${fallbackValue}`;
+          console.warn(response);
+
+          if (!configs.channelIDs.missingTranslation) return;
+
+          const channel = this.channels.get(configs.channelIDs.missingTranslation);
+          if (!channel) return;
+
+          // TODO: send the message
+          // channel.send();
+        },
+        preload: await directoryNames(languages),
+        ns: namespaces,
+        backend: {
+          loadPath: `${languages}/{{lng}}/{{ns}}.json`,
+        },
+        // Silly bug in i18next needs a second param when unnecessary
+      },
+      undefined,
+    );
+  }
+
+  async reloadLang(language?: string[]) {
+    const namespaces = await this.determineNamespaces(path.join(process.cwd(), 'languages'));
+
+    i18next.reloadResources(language, namespaces, undefined);
   }
 
   processReactionCollector(message: Message) {
