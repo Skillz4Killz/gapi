@@ -1,5 +1,6 @@
 import EventEmitter from 'events';
 import { baseStructures } from './base';
+import Channel from './lib/Channel';
 import Team from './lib/Team';
 import User from './lib/User';
 import { structures } from './structures';
@@ -25,6 +26,8 @@ export default class Client extends EventEmitter {
   users = new baseStructures.Collection<string, User>(this);
   /** All the teams currently cached/accessible to the client. */
   teams = new baseStructures.Collection<string, Team>(this);
+  /** All the teams currently cached/accessible to the client. */
+  channels = new baseStructures.Collection<string, Channel>(this);
 
   /** The request manager that will manage your rate limits. */
   requestManager = new structures.RequestManager(this);
@@ -74,7 +77,7 @@ export default class Client extends EventEmitter {
 
   /** Edit the clients banner */
   editBanner(url: string) {
-      return this.requestManager.editClientBanner(url);
+    return this.requestManager.editClientBanner(url);
   }
 }
 
