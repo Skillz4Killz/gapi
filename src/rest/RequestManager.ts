@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import Client from '../Client';
-import Team, { GuildedTeam } from '../lib/Team';
+import { GuildedTeam } from '../lib/Team';
 import User from '../lib/User';
 import { ENDPOINTS } from './endpoints';
 
@@ -98,7 +98,7 @@ export default class RequestManager {
   /** Fetches a team. */
   async fetchTeam(id: string) {
     const res = await this.get(ENDPOINTS.team(id));
-    return this.client.teams.set(id, new Team(this.client, res.team)).get(id);
+    return this.client.teams.get(id)?.update(res.team);
   }
 
   async fetchCustomReactions(id: string, _force = false, _cache = true) {
