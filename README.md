@@ -122,6 +122,9 @@ export default class extends Command {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/23035000/111086232-6d42a100-84f1-11eb-949a-b7de53bd3984.png)
+
+
 ## Advanced Customizations
 
 Everything below this is to showcase examples of advanced features! They are intentionally written in a way that is confusing to a beginner developer, as it is not meant for you. This is an extreme edge case scenario for bots that scale really big!
