@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 import path from 'path';
-import { baseStructures } from '../base';
 import Client, { ClientOptions } from '../Client';
 import Message from '../lib/Message';
+import Collection from '../utils/Collection';
 import { bgBlue, bgYellow, black } from '../utils/colorette';
 import { walk } from '../utils/walk';
 import Argument from './Argument';
@@ -14,17 +14,17 @@ import Task from './Task';
 
 export default class BotClient extends Client {
   /** All your bot's arguments will be available here. */
-  arguments = new baseStructures.Collection<string, Argument>(this);
+  arguments = new Collection<string, Argument>(this);
   /** All your bot commands will be available here */
-  commands = new baseStructures.Collection<string, Command>(this);
+  commands = new Collection<string, Command>(this);
   /** All your bot's events will be available here. */
-  events = new baseStructures.Collection<string, Event>(this);
+  events = new Collection<string, Event>(this);
   /** All your bot's inhibitors will be available here. */
-  inhibitors = new baseStructures.Collection<string, Inhibitor>(this);
+  inhibitors = new Collection<string, Inhibitor>(this);
   /** All your bot's monitors will be available here */
-  monitors = new baseStructures.Collection<string, Monitor>(this);
+  monitors = new Collection<string, Monitor>(this);
   /** All your bot's tasks will be available here. */
-  tasks = new baseStructures.Collection<string, Task>(this);
+  tasks = new Collection<string, Task>(this);
   /** The bot's default prefix */
   prefix: string;
   /** The bot's prefixes per team. <teamId, prefix> */

@@ -1,4 +1,3 @@
-import { baseStructures } from '../base';
 import Message from '../lib/Message';
 import Collection from '../utils/Collection';
 import BotClient from './Client';
@@ -38,7 +37,7 @@ export class Command {
   constructor(client: BotClient, name: string) {
     this.client = client;
     if (!this.name) this.name = name;
-    this.subcommands = new baseStructures.Collection<string, Command>(this.client);
+    this.subcommands = new Collection<string, Command>(this.client);
 
     this.client.commands.set(name, this);
   }

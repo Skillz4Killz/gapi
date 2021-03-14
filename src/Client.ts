@@ -1,10 +1,12 @@
 import EventEmitter from 'events';
-import { baseStructures } from './base';
 import Channel from './lib/Channel';
 import Team from './lib/Team';
 import User from './lib/User';
-import { structures } from './structures';
+import RequestManager from './rest/RequestManager';
+import Collection from './utils/Collection';
+import GuildedEvents from './websocket/Events';
 import Shard from './websocket/Shard';
+import WebsocketManager from './websocket/WebsocketManager';
 
 export default class Client extends EventEmitter {
   /** The id of this client. */
@@ -23,18 +25,18 @@ export default class Client extends EventEmitter {
   maxReconnectionAttempts = Infinity;
 
   /** All the users currently cached/accessible to the client. */
-  users = new baseStructures.Collection<string, User>(this);
+  users = new Collection<string, User>(this);
   /** All the teams currently cached/accessible to the client. */
-  teams = new baseStructures.Collection<string, Team>(this);
+  teams = new Collection<string, Team>(this);
   /** All the teams currently cached/accessible to the client. */
-  channels = new baseStructures.Collection<string, Channel>(this);
+  channels = new Collection<string, Channel>(this);
 
   /** The request manager that will manage your rate limits. */
-  requestManager = new structures.RequestManager(this);
+  requestManager = new RequestManager(this);
   /** The websocket manager that will manage your websocket connections */
-  websocketManager = new structures.WebsocketManager(this);
+  websocketManager = new WebsocketManager(this);
   /** The events manager that will handle incoming websocket event payloads. */
-  eventsManager = new structures.GuildedEvents(this);
+  eventsManager = new GuildedEvents(this);
 
   constructor(options: ClientOptions) {
     super();
