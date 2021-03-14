@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/Skillz4Killz/gapi#readme",
   "dependencies": {
+    "i18next": "^19.9.2",
     "node-fetch": "^2.6.1",
     "ws": "^7.4.3"
   },
