@@ -1,7 +1,7 @@
-import Client from '../Client';
-import Base from './Base';
+import { Client } from '../Client';
+import { Base } from './Base';
 
-export default class User extends Base {
+export class User extends Base {
   /** The unique hash for this users avatar. */
   avatarHash = '';
   /** The unique hash for this users banner. */

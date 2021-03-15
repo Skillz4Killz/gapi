@@ -1,7 +1,7 @@
-import Message from '../../../lib/Message';
-import Team from '../../../lib/Team';
+import { Message } from '../../../lib/Message';
+import { Team } from '../../../lib/Team';
 import { Command } from '../../Command';
-import Inhibitor from '../../Inhibitor';
+import { Inhibitor } from '../../Inhibitor';
 
 export default class extends Inhibitor {
   name = 'cooldown';

@@ -1,6 +1,6 @@
-import Client from '../Client';
+import { Client } from '../Client';
 
-export default class Base {
+export class Base {
   /** The unique identifier for this object */
   id: string;
   /** The client object */

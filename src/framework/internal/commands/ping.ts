@@ -1,4 +1,4 @@
-import Message from '../../../lib/Message';
+import { Message } from '../../../lib/Message';
 import { Command } from '../../Command';
 
 export default class extends Command {

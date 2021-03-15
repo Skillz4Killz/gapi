@@ -1,7 +1,7 @@
-import Message from '../lib/Message';
-import BotClient from './Client';
+import { Message } from '../lib/Message';
+import { BotClient } from './Client';
 
-export default class Monitor {
+export class Monitor {
   /** The client itself */
   client: BotClient;
   /** The name of the task. */

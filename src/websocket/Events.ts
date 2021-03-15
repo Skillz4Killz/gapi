@@ -1,7 +1,7 @@
-import Client from '../Client';
-import Message from '../lib/Message';
+import { Message } from "../..";
+import { Client } from "../Client";
 
-export default class GuildedEvents {
+export class GuildedEvents {
   /** The client for this event manager. */
   client: Client;
 

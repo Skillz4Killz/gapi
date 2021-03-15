@@ -1,14 +1,14 @@
 import EventEmitter from 'events';
-import Channel from './lib/Channel';
-import Team from './lib/Team';
-import User from './lib/User';
-import RequestManager from './rest/RequestManager';
-import Collection from './utils/Collection';
-import GuildedEvents from './websocket/Events';
-import Shard from './websocket/Shard';
-import WebsocketManager from './websocket/WebsocketManager';
+import { Channel } from './lib/Channel';
+import { Team } from './lib/Team';
+import { User } from './lib/User';
+import { RequestManager } from './rest/RequestManager';
+import { Collection } from './utils/Collection';
+import { GuildedEvents } from './websocket/Events';
+import { Shard } from './websocket/Shard';
+import { WebsocketManager } from './websocket/WebsocketManager';
 
-export default class Client extends EventEmitter {
+export class Client extends EventEmitter {
   /** The id of this client. */
   id = '';
   /** The email address used to log in. */

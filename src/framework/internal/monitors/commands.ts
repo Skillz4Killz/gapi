@@ -1,8 +1,8 @@
-import Message from '../../../lib/Message';
-import Team from '../../../lib/Team';
+import { Message } from '../../../lib/Message';
+import { Team } from '../../../lib/Team';
 import { bgYellow, black, bgBlack, red, green, white, bgGreen, bgMagenta, bgBlue } from '../../../utils/colorette';
 import { Command } from '../../Command';
-import Monitor from '../../Monitor';
+import { Monitor } from '../../Monitor';
 
 export default class extends Monitor {
   ignoreDM = false;
@@ -175,7 +175,7 @@ export default class extends Monitor {
               name: argument.name,
               type:
                 argument.type === 'subcommand'
-                  ? command.subcommands?.map(sub => sub.name).join(', ') || 'subcommand'
+                  ? command.subcommands?.map((sub: { name: any; }) => sub.name).join(', ') || 'subcommand'
                   : argument.type,
             }),
           )

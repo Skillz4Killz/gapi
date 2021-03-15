@@ -1,21 +1,17 @@
 import { readdir } from 'fs/promises';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
-import path from 'path';
+import path from 'node:path';
+import { Collection, walk, Message, bgBlue, bgYellow, black, directoryNames, Event } from '../..';
 import configs from '../../tests/configs';
-import Client, { ClientOptions } from '../Client';
-import Message from '../lib/Message';
-import Collection from '../utils/Collection';
-import { bgBlue, bgYellow, black } from '../utils/colorette';
-import { directoryNames, walk } from '../utils/walk';
-import Argument from './Argument';
+import { Client, ClientOptions } from '../Client';
+import { Argument } from './Argument';
 import { Command } from './Command';
-import Event from './Event';
-import Inhibitor from './Inhibitor';
-import Monitor from './Monitor';
-import Task from './Task';
+import { Inhibitor } from './Inhibitor';
+import { Monitor } from './Monitor';
+import { Task } from './Task';
 
-export default class BotClient extends Client {
+export class BotClient extends Client {
   /** All your bot's arguments will be available here. */
   arguments = new Collection<string, Argument>(this);
   /** All your bot commands will be available here */

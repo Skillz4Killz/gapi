@@ -1,6 +1,6 @@
-import Message from '../lib/Message';
-import Collection from '../utils/Collection';
-import BotClient from './Client';
+import { Message } from '../lib/Message';
+import { Collection } from '../utils/Collection';
+import { BotClient } from './Client';
 
 export class Command {
   /** The client itself */

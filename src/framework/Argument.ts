@@ -1,8 +1,8 @@
-import Message from '../lib/Message';
-import BotClient from './Client';
+import { Message } from '../lib/Message';
+import { BotClient } from './Client';
 import { Command, CommandArgument } from './Command';
 
-export default class Argument {
+export class Argument {
   /** The client itself */
   client: BotClient;
   /** The name of the argument. */

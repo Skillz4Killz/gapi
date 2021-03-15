@@ -1,9 +1,9 @@
-import Message from '../lib/Message';
-import Team from '../lib/Team';
-import BotClient from './Client';
+import { Message } from '../lib/Message';
+import { Team } from '../lib/Team';
+import { BotClient } from './Client';
 import { Command } from './Command';
 
-export default class Inhibitor {
+export class Inhibitor {
   /** The client itself */
   client: BotClient;
   /** The name of the inhibitor. */

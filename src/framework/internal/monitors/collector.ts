@@ -1,6 +1,6 @@
-import Message from '../../../lib/Message';
+import { Message } from '../../../lib/Message';
 import { bgYellow, black, bgBlack, green, white, bgBlue } from '../../../utils/colorette';
-import Monitor from '../../Monitor';
+import { Monitor } from '../../Monitor';
 
 export default class extends Monitor {
   ignoreDM = false;

@@ -1,7 +1,7 @@
-import Collection from '../utils/Collection';
-import Message from './Message';
+import { Collection } from '../utils/Collection';
+import { Message } from './Message';
 
-export default class ChannelMessages extends Collection<string, Message> {
+export class ChannelMessages extends Collection<string, Message> {
   /** Delete multiple messages */
   async bulkDelete(messageIds: string[]) {
     // TODO: figure out how to bulk delete

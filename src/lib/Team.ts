@@ -1,9 +1,9 @@
-import Client from '../Client';
-import Collection from '../utils/Collection';
-import Base from './Base';
-import User from './User';
+import { Collection } from '../..';
+import { Client } from '../Client';
+import { Base } from './Base';
+import { User } from './User';
 
-export default class Team extends Base {
+export class Team extends Base {
   /** The unique hash for this teams banner. */
   hash = '';
   /** The name of the team */

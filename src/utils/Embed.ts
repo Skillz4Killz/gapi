@@ -1,4 +1,4 @@
-import User from '../lib/User';
+import { User } from '../lib/User';
 
 export const EMBED_LIMITS = {
   title: 256,

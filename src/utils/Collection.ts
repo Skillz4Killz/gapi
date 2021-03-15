@@ -1,7 +1,7 @@
-import Client from '../Client';
+import { Client } from '../Client';
 import { chooseRandom } from './random';
 
-export default class Collection<K, V> extends Map<K, V> {
+export class Collection<K, V> extends Map<K, V> {
   maxSize?: number;
   client: Client;
 

@@ -1,10 +1,10 @@
 import fetch from 'node-fetch';
-import Client from '../Client';
+import { Client } from '../Client';
 import { GuildedTeam } from '../lib/Team';
-import User from '../lib/User';
+import { User } from '../lib/User';
 import { ENDPOINTS } from './endpoints';
 
-export default class RequestManager {
+export class RequestManager {
   /** The client itself */
   client: Client;
   /** The signed session information */

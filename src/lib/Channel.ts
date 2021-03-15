@@ -1,10 +1,10 @@
-import Client from '../Client';
-import Collection from '../utils/Collection';
-import Base from './Base';
-import ChannelMessages from './ChannelMessages';
-import Message from './Message';
+import { Client } from '../Client';
+import { Collection } from '../utils/Collection';
+import { Base } from './Base';
+import { ChannelMessages } from './ChannelMessages';
+import { Message } from './Message';
 
-export default class Channel extends Base {
+export class Channel extends Base {
   /** The channel id where this channel is */
   id: string;
   /** The team id where this channel is */

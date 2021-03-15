@@ -1,8 +1,8 @@
-import Client from '../Client';
 import WebSocket from 'ws';
 import EventEmitter from 'events';
+import { Client } from '../Client';
 
-export default class Shard extends EventEmitter {
+export class Shard extends EventEmitter {
   /** The shard id */
   id: string;
   /** The client itself */

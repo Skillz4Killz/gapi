@@ -1,7 +1,7 @@
-import Message from '../../../lib/Message';
+import { Message } from '../../../lib/Message';
 import { humanizeMilliseconds } from '../../../utils/time';
 import { Command } from '../../Command';
-import Inhibitor from '../../Inhibitor';
+import { Inhibitor } from '../../Inhibitor';
 
 export interface Cooldown {
   used: number;
