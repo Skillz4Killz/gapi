@@ -1,15 +1,18 @@
 import { readdir } from 'fs/promises';
 import i18next from 'i18next';
 import Backend from 'i18next-fs-backend';
-import path from 'node:path';
-import { Collection, walk, Message, bgBlue, bgYellow, black, directoryNames, Event } from '../..';
-import configs from '../../tests/configs';
+import path from 'path';
 import { Client, ClientOptions } from '../Client';
+import { Message } from '../lib/Message';
+import { Collection } from '../utils/Collection';
+import { bgBlue, bgYellow, black } from '../utils/colorette';
+import { directoryNames, walk } from '../utils/walk';
 import { Argument } from './Argument';
 import { Command } from './Command';
 import { Inhibitor } from './Inhibitor';
 import { Monitor } from './Monitor';
 import { Task } from './Task';
+import { Event } from './Event';
 
 export class BotClient extends Client {
   /** All your bot's arguments will be available here. */
@@ -32,10 +35,13 @@ export class BotClient extends Client {
   languages = new Map<string, string>();
   /** The path that the end users commands,monitors, inhibitors and others will be located. */
   sourceFolderPath: string;
+  /** The configurations provided */
+  configs: BotClientOptions;
 
   constructor(options: BotClientOptions) {
     super(options);
 
+    this.configs = options;
     this.prefix = options.prefix;
     this.sourceFolderPath = options.sourceFolderPath || path.join(process.cwd(), 'src/');
 
@@ -212,13 +218,9 @@ export class BotClient extends Client {
           const response = `Missing translation key: ${lng}/${ns}/${key}. Instead using: ${fallbackValue}`;
           console.warn(response);
 
-          if (!configs.channelIDs.missingTranslation) return;
-
-          const channel = this.channels.get(configs.channelIDs.missingTranslation);
-          if (!channel) return;
+          if (!this.configs.webhooks?.missingTranslation) return;
 
           // TODO: send the message
-          // channel.send();
         },
         preload: await directoryNames(languages),
         ns: namespaces,
@@ -246,4 +248,7 @@ export class BotClient extends Client {
 export interface BotClientOptions extends ClientOptions {
   prefix: string;
   sourceFolderPath?: string;
+  webhooks?: {
+    missingTranslation?: string;
+  };
 }

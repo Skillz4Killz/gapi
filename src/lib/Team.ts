@@ -1,5 +1,5 @@
-import { Collection } from '../..';
 import { Client } from '../Client';
+import { Collection } from '../utils/Collection';
 import { Base } from './Base';
 import { User } from './User';
 
