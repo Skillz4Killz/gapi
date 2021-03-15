@@ -175,7 +175,7 @@ export default class extends Monitor {
               name: argument.name,
               type:
                 argument.type === 'subcommand'
-                  ? command.subcommands?.map((sub: { name: any; }) => sub.name).join(', ') || 'subcommand'
+                  ? command.subcommands?.map((sub: { name: any }) => sub.name).join(', ') || 'subcommand'
                   : argument.type,
             }),
           )
