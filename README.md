@@ -6,7 +6,7 @@
 
 A TypeScript NodeJS API Wrapper for Guilded.gg API.
 
-![image](https://img.guildedcdn.com/ContentMedia/cddfebfa0ca84afd72f2a6bdc55bb158-Full.webp?w=713&h=130)
+![image](https://user-images.githubusercontent.com/23035000/111086390-3c16a080-84f2-11eb-83e8-64aec67963b5.png)
 
 > Currently unstable and in active dev. Use with caution.
 
@@ -75,7 +75,7 @@ new Client({ email: 'emailhere', password: 'passwordhere' })
   .on('ready', () => console.log('Successfully connected to gateway'))
   .on('messageCreate', message => {
     if (message.content === '!ping') {
-      // TODO: pending
+      message.send(`Ping MS: ${Date.now() - message.timestamp}ms`);
     }
   })
   .on('unknown', console.log)
@@ -121,6 +121,8 @@ export default class extends Command {
   }
 }
 ```
+
+![image](https://user-images.githubusercontent.com/23035000/111086232-6d42a100-84f1-11eb-949a-b7de53bd3984.png)
 
 ## Advanced Customizations
 
