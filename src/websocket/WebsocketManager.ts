@@ -1,5 +1,6 @@
-import { Collection, BASE_URL } from '../..';
 import { Client } from '../Client';
+import { BASE_URL } from '../rest/endpoints';
+import { Collection } from '../utils/Collection';
 import { Shard } from './Shard';
 
 export class WebsocketManager extends Collection<string, Shard> {
