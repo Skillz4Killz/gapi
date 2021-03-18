@@ -11,11 +11,16 @@ export * from './src/framework/Task';
 
 export * from './src/Client';
 
+export * from './src/lib/BitFields/BitField';
+export * from './src/lib/BitFields/Roles';
+export * from './src/lib/Permissions/Announcement';
+export * from './src/lib/Permissions/Permissions';
 export * from './src/lib/Base';
 export * from './src/lib/Channel';
 export * from './src/lib/ChannelMessages';
+export * from './src/lib/Member';
 export * from './src/lib/Message';
-export * from './src/lib/Permissions';
+export * from './src/lib/Role';
 export * from './src/lib/Team';
 export * from './src/lib/User';
 
