@@ -1,15 +1,3 @@
-// TODO: add proper permission class methods
-export class Permissions {}
-
-export enum AnnouncementPermissions {
-  /** Allows you to create and remove announcements. */
-  CREATE_ANNOUNCEMENTS = 1,
-  /** Allows you to view announcements */
-  VIEW_ANNOUNCEMENTS,
-  /** Allows you to delete announcements made by other users. */
-  MANAGE_ANNOUNCEMENTS = 4,
-}
-
 export enum BotPermissions {
   /** Allows you to create and edit bots using the automated workflow. */
   MANAGE_BOTS = 1,
