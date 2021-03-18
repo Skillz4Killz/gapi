@@ -92,4 +92,10 @@ export interface CommandArgument {
   literals?: string[];
   /** The default value for this argument/subcommand. */
   defaultValue?: string | boolean | number | ((message: Message, command: Command, argument: CommandArgument) => any);
+  /** The minimum amount for the number type argument. */
+  minimum?: number;
+  /** The maximum amount for the number type argument. */
+  maximum?: number;
+  /** Whether or not to allow decimals for the number type argument */
+  allowDecimals?: boolean;
 }
