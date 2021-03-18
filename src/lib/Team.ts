@@ -1,6 +1,8 @@
 import { Client } from '../Client';
 import { Collection } from '../utils/Collection';
 import { Base } from './Base';
+import { Member } from './Member';
+import { Role, RolePayload } from './Role';
 import { User } from './User';
 
 export class Team extends Base {
@@ -11,7 +13,8 @@ export class Team extends Base {
   /** The language that this team uses. */
   locale: string;
 
-  members = new Collection(this.client);
+  members = new Collection<string, Member>(this.client);
+  roles = new Collection<string, Role>(this.client);
   groups = new Collection(this.client);
 
   constructor(client: Client, payload: GuildedTeam) {
@@ -50,10 +53,18 @@ export class Team extends Base {
       }
 
       // We want collections so skip these
-      if (['members', 'groups'].includes(key)) {
-        for (const member of value) {
-          // this.members.set(member.id, new User(client, member));
-          this.client.users.set(member.id, new User(this.client, member));
+      if (['members', 'groups', 'rolesById'].includes(key)) {
+        if (key === 'members') {
+          for (const member of value) {
+            this.members.set(member.id, new Member(this.client, member, this.id));
+            this.client.users.set(member.id, new User(this.client, member));
+          }
+        }
+
+        if (key === 'rolesById') {
+          for (const [id, data] of Object.entries(value)) {
+            this.roles.set(id, new Role(this.client, data as RolePayload));
+          }
         }
         continue;
       }
