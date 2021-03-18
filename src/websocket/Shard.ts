@@ -1,8 +1,7 @@
 import WebSocket from 'ws';
-import EventEmitter from 'events';
 import { Client } from '../Client';
 
-export class Shard extends EventEmitter {
+export class Shard {
   /** The shard id */
   id: string;
   /** The client itself */
@@ -37,7 +36,6 @@ export class Shard extends EventEmitter {
     client: Client,
     options?: { reconnectionAttempt?: number; maxReconnectionAttempts?: number },
   ) {
-    super();
     this.client = client;
     this.id = id;
     if (options?.reconnectionAttempt) this.reconnectionAttempts = options.reconnectionAttempt;
@@ -64,7 +62,7 @@ export class Shard extends EventEmitter {
       return this.initialize();
     }
 
-    this.emit('connectError', new Error('Existing connection detected'), this.id);
+    this.client.emit('connectError', new Error('Existing connection detected'), this.id);
   }
 
   /** Initialize the websocket connection and setup handling */
@@ -83,7 +81,7 @@ export class Shard extends EventEmitter {
 
     this.connectTimeout = setTimeout(() => {
       if (this.isConnecting) {
-        this.emit('wsConnectionError', new Error('Connection timeout'), this.id);
+        this.client.emit('wsConnectionError', new Error('Connection timeout'), this.id);
         this.disconnect();
       }
     }, this.client.connectionTimeout);
@@ -92,22 +90,20 @@ export class Shard extends EventEmitter {
   /** Handler for whenever a shard emits open event */
   onShardOpen() {
     this.status = 'handshaking';
-    this.emit('connect', this.id);
+    this.client.emit('connect', this.id);
     this.lastHeartbeatAck = true;
   }
 
   /** Handler for whenever a shard emits message event */
   onShardMessage(data: WebSocket.Data) {
     try {
-      // console.log(data);
       const code = data.toString().match(/[0-9]+/)?.[0];
       if (!code) return;
 
       const message = data.toString().substring(code?.toString().length);
       const packet = JSON.parse(message || '{}');
 
-      this.emit('raw', packet, this.id);
-
+      this.client.emit('raw', packet, this.id);
       switch (code) {
         case '0':
           // SAVE THE SESSION ID
@@ -128,7 +124,7 @@ export class Shard extends EventEmitter {
           }
           this.connectTimeout = undefined;
 
-          this.emit('hello', packet, this.id);
+          this.client.emit('hello', packet, this.id);
           break;
         case '3':
           this.lastHeartbeatAck = true;
@@ -136,34 +132,34 @@ export class Shard extends EventEmitter {
           break;
         case '40':
           // TODO: MAY NEED TO BE SHARDREADY
-          this.emit('ready');
+          this.client.emit('ready');
           break;
         case '42':
           this.client.eventsManager.process(this.id, packet);
           break;
         default:
           // UNKNOWN EVENT
-          this.emit('unknown', code, packet, this.id);
+          this.client.emit('unknown', code, packet, this.id);
       }
     } catch (err) {
-      this.emit('shardMessageError', err, this.id);
+      this.client.emit('shardMessageError', err, this.id);
     }
   }
 
   /** Handler for whenever a shard emits error event */
   onShardError(error: Error) {
-    this.emit('shardError', error, this.id);
+    this.client.emit('shardError', error, this.id);
   }
 
   /** Handler for whenever a shard emits close event */
   onShardClose(code: number, reason: string) {
-    this.emit(
+    this.client.emit(
       'debug',
       `[DEBUG] Shard disconnected`,
       this.id,
       `With code ${code} because of: ${reason || 'Unknown reason.'}`,
     );
-    this.emit('shardClosed', this.id, code, reason);
+    this.client.emit('shardClosed', this.id, code, reason);
     // TODO: Remove this extra log, for debugging only
     console.log('shard closed', code, reason);
     this.disconnect();

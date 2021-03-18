@@ -50,7 +50,7 @@ export class BotClient extends Client {
 
   /** Load all the files for the bot. */
   async init() {
-    await Promise.all(
+    await Promise.allSettled(
       [
         ['arguments', this.arguments] as const,
         ['commands', this.commands] as const,
@@ -58,22 +58,27 @@ export class BotClient extends Client {
         ['monitors', this.monitors] as const,
         ['tasks', this.tasks] as const,
       ].map(async ([dir, collection]) => {
-        for await (const result of walk(path.join(__dirname, `./internal/${dir}/`))) {
-          if (!result) return;
+        try {
+          for await (const result of walk(path.join(__dirname, `./internal/${dir}/`))) {
+            if (!result) return;
 
-          const [filename, file] = result;
-          const name = filename.substring(0, filename.length - 2);
-          const piece = file.default ? new file.default(this, name) : new file(this, name);
-          if (piece.subcommand) this.createSubcommand(piece.subcommand, piece);
-          else collection.set(piece.name || name, piece);
+            const [filename, file] = result;
+            const name = filename.substring(0, filename.length - 2);
+            const piece = file.default ? new file.default(this, name) : new file(this, name);
 
-          if (piece.init) await piece.init();
+            if (piece.subcommand) this.createSubcommand(piece.subcommand, piece);
+            else collection.set(piece.name || name, piece);
+
+            if (piece.init) await piece.init();
+          }
+        } catch (error) {
+          console.log(error);
         }
       }),
-    );
+    ).catch(() => null);
 
     // Load all end user files
-    await Promise.all(
+    await Promise.allSettled(
       [
         ['arguments', this.arguments] as const,
         ['commands', this.commands] as const,
@@ -81,17 +86,23 @@ export class BotClient extends Client {
         ['monitors', this.monitors] as const,
         ['tasks', this.tasks] as const,
       ].map(async ([dir, collection]) => {
-        for await (const result of walk(path.join(this.sourceFolderPath, dir))) {
-          if (!result) return;
+        try {
+          for await (const result of walk(path.join(this.sourceFolderPath, dir))) {
+            if (!result) return;
 
-          const [filename, file] = result;
-          const name = filename.substring(0, filename.length - 2);
-          const piece = file.default ? new file.default(this, name) : new file(this, name);
-          collection.set(piece.name || name, piece);
-          if (piece.init) await piece.init();
+            const [filename, file] = result;
+            const name = filename.substring(0, filename.length - 2);
+            const piece = file.default ? new file.default(this, name) : new file(this, name);
+
+            if (piece.subcommand) this.createSubcommand(piece.subcommand, piece);
+            else collection.set(piece.name || name, piece);
+            if (piece.init) await piece.init();
+          }
+        } catch (error) {
+          console.log(error);
         }
       }),
-    );
+    ).catch(() => null);
 
     this.initializeMessageListener();
     this.initializeTasks();
