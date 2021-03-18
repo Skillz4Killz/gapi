@@ -3,7 +3,7 @@ import { Argument } from '../../Argument';
 import { Command, CommandArgument } from '../../Command';
 
 export default class extends Argument {
-  name = 'string';
+  name = 'subcommand';
 
   async execute(parameters: string[], _message: Message, command: Command, argument: CommandArgument) {
     const [subcommandName] = parameters;

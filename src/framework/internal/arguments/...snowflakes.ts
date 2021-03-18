@@ -2,7 +2,7 @@ import { Argument } from '../../Argument';
 import { SNOWFLAKE_REGEX } from '../../constants/snowflakeRegex';
 
 export default class extends Argument {
-  name = 'string';
+  name = '...snowflakes';
 
   async execute(parameters: string[]) {
     const cleaned = parameters.map(p => {

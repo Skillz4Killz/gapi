@@ -3,7 +3,7 @@ import { Argument } from '../../Argument';
 import { Command, CommandArgument } from '../../Command';
 
 export default class extends Argument {
-  name = 'string';
+  name = '...string';
 
   async execute(parameters: string[], _message: Message, _command: Command, argument: CommandArgument) {
     if (!parameters.length) return;
