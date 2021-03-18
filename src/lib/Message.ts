@@ -49,6 +49,11 @@ export class Message extends Base {
     return this.client.users.get(this.authorId)!;
   }
 
+  /** The member of this message if it was sent in a team */
+  get member() {
+    return this.team?.members.get(this.authorId);
+  }
+
   /** The team where this message was sent */
   get team() {
     return this.client.teams.get(this.teamId);
@@ -117,7 +122,7 @@ export class Message extends Base {
           nodes: [
             {
               object: 'block',
-              type: 'paragraph',
+              type: 'markdown-plain-text',
               data: {},
               nodes: [
                 {
