@@ -64,7 +64,9 @@ export class BotClient extends Client {
           const [filename, file] = result;
           const name = filename.substring(0, filename.length - 2);
           const piece = file.default ? new file.default(this, name) : new file(this, name);
-          collection.set(piece.name || name, piece);
+          if (piece.subcommand) this.createSubcommand(piece.subcommand, piece);
+          else collection.set(piece.name || name, piece);
+
           if (piece.init) await piece.init();
         }
       }),
@@ -242,6 +244,43 @@ export class BotClient extends Client {
   processReactionCollector(message: Message) {
     // TODO: forward to channel.processReactionCollector
     console.log(message);
+  }
+
+  createSubcommand(commandName: string, subcommand: Command, retries = 0) {
+    const names = commandName.split('-');
+
+    let command = this.commands.get(commandName);
+
+    if (names.length > 1) {
+      for (const name of names) {
+        const validCommand = command ? command.subcommands?.get(name) : this.commands.get(name);
+
+        if (!validCommand) {
+          if (retries === 20) break;
+          setTimeout(() => this.createSubcommand(commandName, subcommand, retries++), 10000);
+          return;
+        }
+
+        command = validCommand;
+      }
+    }
+
+    if (!command) {
+      // If 10 minutes have passed something must have been wrong
+      if (retries === 20) {
+        return console.log(`Subcommand ${subcommand} unable to be created for ${commandName}`);
+      }
+
+      // Try again in 10 seconds in case this command file just has not been loaded yet.
+      setTimeout(() => this.createSubcommand(commandName, subcommand, retries++), 10000);
+      return;
+    }
+
+    if (!command.subcommands) {
+      command.subcommands = new Collection(this);
+    }
+
+    command.subcommands.set(subcommand.name, subcommand);
   }
 }
 
