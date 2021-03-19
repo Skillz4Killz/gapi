@@ -1,6 +1,7 @@
 import { Client } from '../Client';
 import { Collection } from '../utils/Collection';
 import { Base } from './Base';
+import { Role } from './Role';
 
 export class Member extends Base {
   name!: string;
@@ -62,9 +63,14 @@ export class Member extends Base {
   /** The roles this member has on this team. */
   get roles() {
     const team = this.team;
-    if (!team) return new Collection(this.client);
+    const roles = new Collection<string, Role>(this.client);
+    if (!team) return roles;
 
-    return this.roleIds.map(id => team.roles.get(id.toString())!).filter(r => r);
+    for (const id of this.roleIds) {
+      if (team.roles.has(id.toString())) roles.set(id.toString(), team.roles.get(id.toString())!);
+    }
+
+    return roles;
   }
 }
 
