@@ -34,8 +34,8 @@ export default class extends Monitor {
   }
 
   /** Determine the prefix from the message */
-  parsePrefix(guildId: string) {
-    const prefix = guildId ? this.client.prefixes.get(guildId) : this.client.prefix;
+  parsePrefix(teamId: string) {
+    const prefix = teamId ? this.client.prefixes.get(teamId) : this.client.prefix;
     return prefix || this.client.prefix;
   }
 
