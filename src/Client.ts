@@ -23,6 +23,8 @@ export class Client extends EventEmitter {
   imageDefaultHeight = 128;
   /** The maximum amount of times to restart a shard by default */
   maxReconnectionAttempts = Infinity;
+  /** Whether the ready event was received */
+  ready = false;
 
   /** All the users currently cached/accessible to the client. */
   users = new Collection<string, User>(this);
@@ -45,6 +47,10 @@ export class Client extends EventEmitter {
     for (const [key, value] of Object.entries(options)) {
       this[key as keyof ClientOptions] = value;
     }
+
+    this.once('ready', () => {
+      this.ready = true;
+    });
   }
 
   /** Get the current client user from cache. Can be undefined if not cached. */
