@@ -2,16 +2,22 @@ import { Bitfield } from '../BitFields/BitField';
 
 export const AnnouncementPermissions = {
   /** Allows you to create and remove announcements. */
-  CREATE_ANNOUNCEMENTS: BigInt(1),
+  CREATE_ANNOUNCEMENTS: 1n,
   /** Allows you to view announcements */
-  VIEW_ANNOUNCEMENTS: BigInt(2),
+  VIEW_ANNOUNCEMENTS: 2n,
   /** Allows you to delete announcements made by other users. */
-  MANAGE_ANNOUNCEMENTS: BigInt(4),
+  MANAGE_ANNOUNCEMENTS: 4n,
 };
 
 export type AnnouncementPermissionsKeys = keyof typeof AnnouncementPermissions;
 
 export class AnnouncementPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: AnnouncementPermissionsKeys | AnnouncementPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(AnnouncementPermissions[permissions]);

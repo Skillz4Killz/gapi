@@ -1,4 +1,4 @@
-import { Message } from '../../../..';
+import { Message } from '../../../lib/Message';
 import { Argument } from '../../Argument';
 
 export default class extends Argument {

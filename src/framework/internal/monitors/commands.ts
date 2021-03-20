@@ -146,10 +146,8 @@ export default class extends Monitor {
 
     // Loop over each argument and validate
     for (const argument of command.arguments) {
-      console.log(argument);
       const resolver = this.client.arguments.get(argument.type || 'string');
       if (!resolver) continue;
-      console.log('resolve found');
 
       const result = await resolver.execute(params, message, command, argument);
       if (result !== undefined) {
