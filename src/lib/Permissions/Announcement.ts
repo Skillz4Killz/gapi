@@ -12,6 +12,12 @@ export const AnnouncementPermissions = {
 export type AnnouncementPermissionsKeys = keyof typeof AnnouncementPermissions;
 
 export class AnnouncementPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: AnnouncementPermissionsKeys | AnnouncementPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(AnnouncementPermissions[permissions]);

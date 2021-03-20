@@ -10,6 +10,12 @@ export const BracketPermissions = {
 export type BracketPermissionsKeys = keyof typeof BracketPermissions;
 
 export class BracketPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: BracketPermissionsKeys | BracketPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(BracketPermissions[permissions]);

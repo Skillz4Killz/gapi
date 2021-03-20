@@ -16,6 +16,12 @@ export const RecruitmentPermissions ={
 export type RecruitmentPermissionsKeys = keyof typeof RecruitmentPermissions;
 
 export class RecruitmentPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: RecruitmentPermissionsKeys | RecruitmentPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(RecruitmentPermissions[permissions]);

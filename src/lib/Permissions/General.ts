@@ -22,6 +22,12 @@ export const GeneralPermissions ={
 export type GeneralPermissionsKeys = keyof typeof GeneralPermissions;
 
 export class GeneralPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: GeneralPermissionsKeys | GeneralPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(GeneralPermissions[permissions]);

@@ -29,6 +29,12 @@ export const VoicePermissions ={
 export type VoicePermissionsKeys = keyof typeof VoicePermissions;
 
 export class VoicePermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: VoicePermissionsKeys | VoicePermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(VoicePermissions[permissions]);

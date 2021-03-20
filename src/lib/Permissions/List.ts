@@ -18,6 +18,12 @@ export const ListPermissions ={
 export type ListPermissionsKeys = keyof typeof ListPermissions;
 
 export class ListPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: ListPermissionsKeys | ListPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(ListPermissions[permissions]);

@@ -18,6 +18,12 @@ export const ChatPermissions ={
 export type ChatPermissionsKeys = keyof typeof ChatPermissions;
 
 export class ChatPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: ChatPermissionsKeys | ChatPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(ChatPermissions[permissions]);

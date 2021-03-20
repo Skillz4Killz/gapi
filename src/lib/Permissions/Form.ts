@@ -10,6 +10,12 @@ export const FormPermissions ={
 export type FormPermissionsKeys = keyof typeof FormPermissions;
 
 export class FormPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: FormPermissionsKeys | FormPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(FormPermissions[permissions]);

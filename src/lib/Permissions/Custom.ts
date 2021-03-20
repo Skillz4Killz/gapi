@@ -12,6 +12,12 @@ export const CustomPermissions ={
 export type CustomPermissionsKeys = keyof typeof CustomPermissions;
 
 export class CustomPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: CustomPermissionsKeys | CustomPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(CustomPermissions[permissions]);

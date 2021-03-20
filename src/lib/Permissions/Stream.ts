@@ -14,6 +14,12 @@ export const StreamPermissions ={
 export type StreamPermissionsKeys = keyof typeof StreamPermissions;
 
 export class StreamPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: StreamPermissionsKeys | StreamPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(StreamPermissions[permissions]);

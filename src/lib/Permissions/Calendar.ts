@@ -16,6 +16,12 @@ export const CalendarPermissions ={
 export type CalendarPermissionsKeys = keyof typeof CalendarPermissions;
 
 export class CalendarPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: CalendarPermissionsKeys | CalendarPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(CalendarPermissions[permissions]);

@@ -14,6 +14,12 @@ export const MediaPermissions ={
 export type MediaPermissionsKeys = keyof typeof MediaPermissions;
 
 export class MediaPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: MediaPermissionsKeys | MediaPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(MediaPermissions[permissions]);

@@ -18,6 +18,12 @@ export const ForumPermissions ={
 export type ForumPermissionsKeys = keyof typeof ForumPermissions;
 
 export class ForumPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: ForumPermissionsKeys | ForumPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(ForumPermissions[permissions]);

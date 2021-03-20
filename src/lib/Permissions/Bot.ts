@@ -8,6 +8,12 @@ export const BotPermissions = {
 export type BotPermissionsKeys = keyof typeof BotPermissions;
 
 export class BotPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: BotPermissionsKeys | BotPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(BotPermissions[permissions]);

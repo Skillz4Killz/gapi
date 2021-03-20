@@ -12,6 +12,12 @@ export const SchedulingPermissions ={
 export type SchedulingPermissionsKeys = keyof typeof SchedulingPermissions;
 
 export class SchedulingPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: SchedulingPermissionsKeys | SchedulingPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(SchedulingPermissions[permissions]);

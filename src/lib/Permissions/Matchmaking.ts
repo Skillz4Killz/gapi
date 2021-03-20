@@ -12,6 +12,12 @@ export const MatchmakingPermissions ={
 export type MatchmakingPermissionsKeys = keyof typeof MatchmakingPermissions;
 
 export class MatchmakingPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: MatchmakingPermissionsKeys | MatchmakingPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(MatchmakingPermissions[permissions]);

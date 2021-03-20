@@ -14,6 +14,12 @@ export const DocPermissions ={
 export type DocPermissionsKeys = keyof typeof DocPermissions;
 
 export class DocPermission extends Bitfield {
+  constructor(bits?: bigint) {
+    super();
+    
+    if (bits) this.bitfield = bits;
+  }
+
   /** Checks whether or not the permissions exist in this */
   has(permissions: DocPermissionsKeys | DocPermissionsKeys[]) {
     if (!Array.isArray(permissions)) return super.contains(DocPermissions[permissions]);
