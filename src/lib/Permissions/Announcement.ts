@@ -6,7 +6,7 @@ export const AnnouncementPermissions = {
   /** Allows you to view announcements */
   VIEW_ANNOUNCEMENTS: 2n,
   /** Allows you to delete announcements made by other users. */
-  MANAGE_ANNOUNCEMENTS: 4,
+  MANAGE_ANNOUNCEMENTS: 4n,
 };
 
 export type AnnouncementPermissionsKeys = keyof typeof AnnouncementPermissions;
