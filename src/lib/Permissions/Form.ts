@@ -1,18 +1,18 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const FormPermissions ={
-    /** Allows you to view all form responses. */
-    FORM_RESPONSES: 2n,
-    /** Allows you to view all poll results. */
-    POLL_RESULTS: 16n,
-  }
+export const FormPermissions = {
+  /** Allows you to view all form responses. */
+  FORM_RESPONSES: 2n,
+  /** Allows you to view all poll results. */
+  POLL_RESULTS: 16n,
+};
 
 export type FormPermissionsKeys = keyof typeof FormPermissions;
 
 export class FormPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

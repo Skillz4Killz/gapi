@@ -1,20 +1,20 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const CustomPermissions ={
-    /** Allows you to create/manage the custom server emojis. */
-    MANAGE_EMOJIS: 1n,
-    /** Allows you to change your own nickname. */
-    CHANGE_NICKNAME: 16n,
-    /** Allows you to change the nickname of others. */
-    MANAGE_NICKNAME: 32n,
-  }
+export const CustomPermissions = {
+  /** Allows you to create/manage the custom server emojis. */
+  MANAGE_EMOJIS: 1n,
+  /** Allows you to change your own nickname. */
+  CHANGE_NICKNAME: 16n,
+  /** Allows you to change the nickname of others. */
+  MANAGE_NICKNAME: 32n,
+};
 
 export type CustomPermissionsKeys = keyof typeof CustomPermissions;
 
 export class CustomPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

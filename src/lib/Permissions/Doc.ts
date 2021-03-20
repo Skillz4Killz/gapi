@@ -1,22 +1,22 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const DocPermissions ={
-    /** Allows you to create docs */
-    CREATE_DOCS: 1n,
-    /** Allows you to view docs */
-    VIEW_DOCS: 2n,
-    /** Allows you to update docs created by others or move them to another channel */
-    MANAGE_DOCS: 4n,
-    /** Allows you to remove docs made by others. */
-    REMOVE_DOCS: 8n,
-  }
+export const DocPermissions = {
+  /** Allows you to create docs */
+  CREATE_DOCS: 1n,
+  /** Allows you to view docs */
+  VIEW_DOCS: 2n,
+  /** Allows you to update docs created by others or move them to another channel */
+  MANAGE_DOCS: 4n,
+  /** Allows you to remove docs made by others. */
+  REMOVE_DOCS: 8n,
+};
 
 export type DocPermissionsKeys = keyof typeof DocPermissions;
 
 export class DocPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

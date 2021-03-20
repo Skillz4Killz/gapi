@@ -55,7 +55,7 @@ export class Role extends Base {
         continue;
       }
 
-      if (key === "permissions") {
+      if (key === 'permissions') {
         this.permissions = {
           announcement: new AnnouncementPermission(value.announcement),
           bot: new BotPermission(value.bot),
@@ -74,7 +74,7 @@ export class Role extends Base {
           scheduling: new SchedulingPermission(value.scheduling),
           stream: new StreamPermission(value.stream),
           voice: new VoicePermission(value.voice),
-        }
+        };
       }
 
       // TODO: FIX THIS
@@ -134,5 +134,5 @@ export interface RolePermissions {
   recruitment?: RecruitmentPermission;
   scheduling?: SchedulingPermission;
   stream?: StreamPermission;
-  voice?: VoicePermission
+  voice?: VoicePermission;
 }

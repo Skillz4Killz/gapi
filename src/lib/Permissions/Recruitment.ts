@@ -1,6 +1,6 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const RecruitmentPermissions ={
+export const RecruitmentPermissions = {
   /** Allows you to approve server and game applications */
   APPROVE_APPLICATIONS: 1n,
   /** Allows you to view server and game applications */
@@ -11,14 +11,14 @@ export const RecruitmentPermissions ={
   INDICATE_INTEREST: 16n,
   /** Allows you to modify the find player statys for server listing card */
   MODIFY_STATUS: 32n,
-}
+};
 
 export type RecruitmentPermissionsKeys = keyof typeof RecruitmentPermissions;
 
 export class RecruitmentPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

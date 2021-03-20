@@ -4,15 +4,15 @@ export const BracketPermissions = {
   /** Allows you to report match scores on behalf of your server. */
   REPORT_SCORES: 1n,
   /** Allows you to view the brackets for the tournaments. */
-  VIEW_BRACKETS: 2n
-}
+  VIEW_BRACKETS: 2n,
+};
 
 export type BracketPermissionsKeys = keyof typeof BracketPermissions;
 
 export class BracketPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

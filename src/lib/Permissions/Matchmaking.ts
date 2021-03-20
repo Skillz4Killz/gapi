@@ -1,20 +1,20 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const MatchmakingPermissions ={
-    /** Allows you to create matchmaking scrims */
-    CREATE_SCRIMS: 1n,
-    /** Allows you to use the server to create and manage tournaments */
-    REGISTER_FOR_TOURNAMENTS: 4n,
-    /** Allows you to register the server for tournaments */
-    CREATE_TOURNAMENTS: 16n,
-  }
+export const MatchmakingPermissions = {
+  /** Allows you to create matchmaking scrims */
+  CREATE_SCRIMS: 1n,
+  /** Allows you to use the server to create and manage tournaments */
+  REGISTER_FOR_TOURNAMENTS: 4n,
+  /** Allows you to register the server for tournaments */
+  CREATE_TOURNAMENTS: 16n,
+};
 
 export type MatchmakingPermissionsKeys = keyof typeof MatchmakingPermissions;
 
 export class MatchmakingPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

@@ -1,26 +1,26 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const ListPermissions ={
-    /** Allows you to create list items */
-    CREATE_LIST_ITEM: 1n,
-    /** Allows you to view list items */
-    VIEW_LIST_ITEMS: 2n,
-    /** Allows you to edi list item messages by others and move them to other channels. */
-    MANAGE_LIST_ITEMS: 4n,
-    /** Allows you to remove list items created by others */
-    REMOVE_LIST_ITEMS: 8n,
-    /** Allows you to complete list items created by others */
-    COMPLETE_LIST_ITEMS: 16n,
-    /** Allows you to reorder list items */
-    REORDER_LIST_ITEMS: 32n,
-  }
+export const ListPermissions = {
+  /** Allows you to create list items */
+  CREATE_LIST_ITEM: 1n,
+  /** Allows you to view list items */
+  VIEW_LIST_ITEMS: 2n,
+  /** Allows you to edi list item messages by others and move them to other channels. */
+  MANAGE_LIST_ITEMS: 4n,
+  /** Allows you to remove list items created by others */
+  REMOVE_LIST_ITEMS: 8n,
+  /** Allows you to complete list items created by others */
+  COMPLETE_LIST_ITEMS: 16n,
+  /** Allows you to reorder list items */
+  REORDER_LIST_ITEMS: 32n,
+};
 
 export type ListPermissionsKeys = keyof typeof ListPermissions;
 
 export class ListPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

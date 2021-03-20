@@ -1,22 +1,22 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const StreamPermissions ={
-    /** Allows you to add a stream and also talk in the streams channel */
-    ADD_STREAM: 1n,
-    /** Allows you to view streams */
-    VIEW_STREAMS: 2n,
-    /** Allows you to talk in stream channel */
-    JOIN_VOICE: 16n,
-    /** Allows you to send message in stream channel */
-    SEND_MESSAGES: 32n,
-  }
+export const StreamPermissions = {
+  /** Allows you to add a stream and also talk in the streams channel */
+  ADD_STREAM: 1n,
+  /** Allows you to view streams */
+  VIEW_STREAMS: 2n,
+  /** Allows you to talk in stream channel */
+  JOIN_VOICE: 16n,
+  /** Allows you to send message in stream channel */
+  SEND_MESSAGES: 32n,
+};
 
 export type StreamPermissionsKeys = keyof typeof StreamPermissions;
 
 export class StreamPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

@@ -1,20 +1,20 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const SchedulingPermissions ={
-    /** Allows you to let server know your available schedule */
-    CREATE_SCHEDULE: 1n,
-    /** Allows you to view server member's schedule */
-    VIEW_SCHEDULES: 2n,
-    /** Allows you to remove availabilities created by others */
-    DELETE_SCHEDULE: 8n,
-  }
+export const SchedulingPermissions = {
+  /** Allows you to let server know your available schedule */
+  CREATE_SCHEDULE: 1n,
+  /** Allows you to view server member's schedule */
+  VIEW_SCHEDULES: 2n,
+  /** Allows you to remove availabilities created by others */
+  DELETE_SCHEDULE: 8n,
+};
 
 export type SchedulingPermissionsKeys = keyof typeof SchedulingPermissions;
 
 export class SchedulingPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

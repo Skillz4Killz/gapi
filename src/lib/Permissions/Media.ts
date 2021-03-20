@@ -1,22 +1,22 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const MediaPermissions ={
-    /** Allows you to create media */
-    CREATE_MEDIA: 1n,
-    /** Allows you to see media */
-    SEE_MEDIA: 2n,
-    /** Allows you to edit media created by others and move to another channel */
-    MANAGE_MEDIA: 4n,
-    /** Allows you to remove media created by others */
-    REMOVE_MEDIA: 8n,
-  }
+export const MediaPermissions = {
+  /** Allows you to create media */
+  CREATE_MEDIA: 1n,
+  /** Allows you to see media */
+  SEE_MEDIA: 2n,
+  /** Allows you to edit media created by others and move to another channel */
+  MANAGE_MEDIA: 4n,
+  /** Allows you to remove media created by others */
+  REMOVE_MEDIA: 8n,
+};
 
 export type MediaPermissionsKeys = keyof typeof MediaPermissions;
 
 export class MediaPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

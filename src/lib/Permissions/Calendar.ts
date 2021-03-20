@@ -1,24 +1,24 @@
 import { Bitfield } from '../BitFields/BitField';
 
-export const CalendarPermissions ={
-    /** Allows you to create events. */
-    CREATE_EVENTS: 1n,
-    /** Allows you to view events. */
-    VIEW_EVENTS: 2n,
-    /** Allows you to manage events */
-    MANAGE_EVENTS: 4n,
-    /** Allows you to remove events created by others. */
-    REMOVE_EVENTS: 8n,
-    /** Allows you to edit RSVP status for members in an event. */
-    EDIT_RSVP: 16n,
-  }
+export const CalendarPermissions = {
+  /** Allows you to create events. */
+  CREATE_EVENTS: 1n,
+  /** Allows you to view events. */
+  VIEW_EVENTS: 2n,
+  /** Allows you to manage events */
+  MANAGE_EVENTS: 4n,
+  /** Allows you to remove events created by others. */
+  REMOVE_EVENTS: 8n,
+  /** Allows you to edit RSVP status for members in an event. */
+  EDIT_RSVP: 16n,
+};
 
 export type CalendarPermissionsKeys = keyof typeof CalendarPermissions;
 
 export class CalendarPermission extends Bitfield {
   constructor(bits?: bigint) {
     super();
-    
+
     if (bits) this.bitfield = bits;
   }
 

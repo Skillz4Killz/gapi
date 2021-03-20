@@ -1,9 +1,9 @@
 import { Bitfield } from '../BitFields/BitField';
 
 export const BotPermissions = {
-    /** Allows you to create and edit bots using the automated workflow. */
-    MANAGE_BOTS: 1n
-}
+  /** Allows you to create and edit bots using the automated workflow. */
+  MANAGE_BOTS: 1n,
+};
 
 export type BotPermissionsKeys = keyof typeof BotPermissions;
 
