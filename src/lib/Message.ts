@@ -41,7 +41,7 @@ export class Message extends Base {
     this.authorId = payload.createdBy;
     this.timestamp = Date.parse(payload.createdAt);
     this.contentId = payload.contentId;
-    this.content = payload.message.content.document.nodes[0]?.nodes[0]?.leaves[0]?.text || '';
+    this.content = this.generateContent(payload.message.content.document.nodes);
   }
 
   /** The author of this message. */
@@ -92,6 +92,26 @@ export class Message extends Base {
   /** Delete the message */
   delete() {
     return this.client.requestManager.deleteMessage(this.channelId, this.id);
+  }
+
+  /** Creates a content string based on the nodes on the message object. */
+  generateContent(nodes: MessageNode[]) {
+    let content = '';
+    for (const node of nodes) {
+      for (const n of node.nodes) {
+        if (n.object === 'text') {
+          for (const leaf of n.leaves) {
+            if (leaf.object === 'leaf') content += leaf.text;
+          }
+        } else if (n.object === 'inline') {
+          if (n.type === 'mention') {
+            content += `<@${n.data?.mention.id}>`;
+          }
+        }
+      }
+    }
+
+    return content;
   }
 
   /** Translate some text for this messages team */
@@ -156,7 +176,22 @@ export interface MessageLeaf {
 
 export interface MessageInnerNode {
   object: string;
+  type?: 'mention';
   leaves: MessageLeaf[];
+  nodes?: MessageInnerNode[];
+  data?: MessageInnerNodeData;
+}
+
+export interface MessageInnerNodeData {
+  mention: {
+    type: 'person';
+    matcher: string;
+    name: string;
+    avatar: string;
+    color: string;
+    id: string;
+    nickname: boolean;
+  };
 }
 
 export interface MessageNode {
