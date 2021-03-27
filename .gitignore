@@ -1,6 +1,7 @@
 # Custom
 ## Allow testing the lib
-test.ts
+src/test.ts
+src/configs.ts
 tests/
 languages/
 
