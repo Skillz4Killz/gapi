@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { Channel } from './lib/Channel';
+import { Channel } from './lib/Channels/Channel';
 import { Team } from './lib/Team';
 import { User } from './lib/User';
 import { RequestManager } from './rest/RequestManager';

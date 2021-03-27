@@ -23,7 +23,14 @@ export class Team extends Base {
     this.locale = 'en_US';
     this.update(payload);
 
+    // This will request these information when caching.
     this.fetchMembers();
+    this.fetchChannels(true);
+  }
+
+  /** Collection of channels in this team. */
+  get channels() {
+    return this.client.channels.filter(channel => channel.teamId === this.id);
   }
 
   /** The url for this teams banner using the default image height and width sizes provided. */
