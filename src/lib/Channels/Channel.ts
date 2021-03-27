@@ -1,14 +1,10 @@
-import { Client } from '../Client';
-import { Collection } from '../utils/Collection';
-import { Base } from './Base';
+import { Client } from '../../Client';
+import { Collection } from '../../utils/Collection';
 import { ChannelMessages } from './ChannelMessages';
-import { Message } from './Message';
+import { Message } from '../Message';
+import { BaseChannel } from './BaseChannel';
 
-export class Channel extends Base {
-  /** The channel id where this channel is */
-  id: string;
-  /** The team id where this channel is */
-  teamId: string;
+export class Channel extends BaseChannel {
   /** The messages sent in this channel. <messageID, message> */
   messages: ChannelMessages;
   /** All the collectors running on this channel. */

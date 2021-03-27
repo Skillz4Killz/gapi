@@ -1,7 +1,7 @@
 import { Client } from '../Client';
 import { Embed } from '../utils/Embed';
 import { Base } from './Base';
-import { Channel } from './Channel';
+import { Channel } from './Channels/Channel';
 
 export class Message extends Base {
   /** The guilded client uuid */

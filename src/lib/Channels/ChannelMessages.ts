@@ -1,5 +1,5 @@
-import { Collection } from '../utils/Collection';
-import { Message } from './Message';
+import { Collection } from '../../utils/Collection';
+import { Message } from '../Message';
 
 export class ChannelMessages extends Collection<string, Message> {
   /** Delete multiple messages */

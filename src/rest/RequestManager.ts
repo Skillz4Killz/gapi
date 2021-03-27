@@ -1,7 +1,9 @@
 import fetch from 'node-fetch';
 import { Client } from '../Client';
+import { Channel } from '../lib/Channels/Channel';
 import { GuildedTeam } from '../lib/Team';
 import { User } from '../lib/User';
+import { Collection } from '../utils/Collection';
 import { ENDPOINTS } from './endpoints';
 
 export class RequestManager {
@@ -155,17 +157,27 @@ export class RequestManager {
 
   // CHANNEL RELATED METHODS
   /** Fetch all the channels in a team. Set force to true to bypass cache and get the results from api. Set cache to false if you do not want to cache the channels once fetched. */
-  async fetchChannels(teamId: string, _force = false, cache = true) {
-    // TODO: enable this once channel structures are done
-    // if (!force && this.client.teams.get(teamId).channels.size) return this.client.teams.get(teamId).channels;
-
-    if (!cache) return this.get(ENDPOINTS.channels(teamId));
+  async fetchChannels(teamId: string, force = false, cache = true) {
+    if (!force && this.client.teams.get(teamId)?.channels.size) return this.client.teams.get(teamId)!.channels;
 
     const channelData = await this.get(ENDPOINTS.channels(teamId));
-    return channelData;
+    const channels = new Collection<string, Channel>(this.client);
+    // console.log(channelData.categories);
 
-    // TODO: return the structures instead and cache the structurs
-    // return channelData.map(c => createChannel())
+    for (const data of channelData.categories) {
+      if (data.roles) console.log('roooooles', data);
+      if (data.roleIds) console.log('roleidsdddss', data);
+      if (data.channelCategoryId) console.log('catgory', data);
+      if (data.userPermissions) console.log('userperms', data);
+      if (data.userPermissions) console.log('userperms', data.userPermissions[0]);
+    }
+
+    for (const data of channelData) {
+      if (cache) this.client.channels.set(data.id, new Channel(this.client, data));
+      channels.set(data.id, new Channel(this.client, data));
+    }
+
+    return channels;
   }
 
   /** Edit a channels info */
